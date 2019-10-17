@@ -1,0 +1,107 @@
+a {
+    text-decoration: none !important;
+    color: #000000;
+}
+
+.hover_all {
+    cursor: pointer;
+}
+
+.hover_all:hover {
+    opacity: 0.5;
+}
+
+.status-index {
+    padding-top: 20px;
+}
+
+.status-index span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.menu-button {
+    position: relative;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.menu-button i {
+    height: 120px;
+    width: 120px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    display: inline-block;
+    border-radius: 50%;
+    color: #000000;
+    text-align: center;
+    line-height: 43px;
+    font-size: 70px;
+    padding-top: 38px;
+}
+
+.menu-button p {
+    font-size: 18px;
+    padding-top: 8px;
+}
+
+.menu-button-mini {
+    text-align: center;
+    margin: 20px;
+
+}
+
+.menu-button-mini i {
+    height: 80px;
+    width: 80px;
+    border: 2px solid #000000;
+    background: #ffffff;
+    display: inline-block;
+    border-radius: 50%;
+    color: #000000;
+    text-align: center;
+    line-height: 5px;
+    font-size: 50px;
+    padding-top: 38px;
+}
+
+.menu-button-mini p {
+    font-size: 18px;
+    padding-top: 8px;
+}
+
+
+.index-menu {
+    padding-top: 100px;
+}
+
+#navbar {
+    height: 50px;
+}
+
+.navbar-brand {
+    padding: 10px 15px;
+}
+
+.table {
+    background: #ffffff;
+}
+
+.car-status {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 10px
+}
+
+
+.list-driver{
+    border-radius: 15px;
+    background: #ffffff;
+    overflow: hidden;
+    padding: 15px;
+    border: 2px solid #f6c23e;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
