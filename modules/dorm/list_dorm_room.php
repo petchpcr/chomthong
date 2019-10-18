@@ -47,7 +47,12 @@
             </div>
           </div>
           <?PHP
-          $sql = "SELECT DISTINCT SUBSTRING(a.dorm_room_name,1,1) as dorm_room_name FROM tb_dorm_room a inner join tb_dorm b on a.dorm_id = b.dorm_id where a.delete_data = 0 and a.dorm_id = '{$dorm_id}' ORDER BY a.dorm_room_name ASC";
+          $sql = "SELECT DISTINCT SUBSTRING(a.dorm_room_name,1,1) as dorm_room_name 
+                  FROM tb_dorm_room a 
+                  inner join tb_dorm b on a.dorm_id = b.dorm_id 
+                  where a.delete_data = 0 
+                  and a.dorm_id = '{$dorm_id}' 
+                  ORDER BY a.dorm_room_name ASC";
           $list_floor = result_array($sql);
           ?>
           <select id="list_dorm_room_floor" class="form-control" data-dorm="<?= $dorm_id; ?>">
@@ -64,7 +69,11 @@
       <div class="row d-flex justify-content-center">
 
         <?PHP
-        $sql = "SELECT * FROM tb_dorm_room a inner join tb_dorm b on a.dorm_id = b.dorm_id where a.delete_data = 0 and a.dorm_id = '{$dorm_id}' AND dorm_room_name LIKE '{$floor}%'";
+        $sql = "SELECT * FROM tb_dorm_room a 
+                inner join tb_dorm b on a.dorm_id = b.dorm_id 
+                where a.delete_data = 0 and a.dorm_id = '{$dorm_id}' 
+                AND dorm_room_name LIKE '{$floor}%'
+                ORDER BY dorm_room_name ASC";
         $list = result_array($sql);
         ?>
 
