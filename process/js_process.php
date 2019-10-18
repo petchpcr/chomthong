@@ -60,6 +60,34 @@ function get_car_by_type($conn, $DATA)
   die;
 }
 
+// ======================================== Dorm ========================================
+function get_qeuip_type($conn, $DATA)
+{
+  $e_type = $DATA["type"];
+  $count = 0;
+  $Sql = "SELECT equipment_id AS xEquip ,equipment_name AS nEquip
+          FROM tb_equipment 
+          WHERE equipment_type LIKE '%$e_type%'";
+
+  $meQuery = mysqli_query($conn, $Sql);
+  while ($Result = mysqli_fetch_assoc($meQuery)) {
+    $return['xEquip'][$count] = $Result['xEquip'];
+    $return['nEquip'][$count] = $Result['nEquip'];
+    $count++;
+  }
+  $return['cnt'] = $count;
+
+  if ($count > 0) {
+    $return['status'] = "success";
+  } else {
+    $return['status'] = "failed";
+  }
+  $return['form'] = "get_qeuip_type";
+  echo json_encode($return);
+  mysqli_close($conn);
+  die;
+}
+
 
 
 if (isset($_POST['DATA'])) {
@@ -72,6 +100,8 @@ if (isset($_POST['DATA'])) {
     get_floor($conn, $DATA);
   } else if ($DATA['STATUS'] == 'get_car_by_type') {
     get_car_by_type($conn, $DATA);
+  } else if ($DATA['STATUS'] == 'get_qeuip_type') {
+    get_qeuip_type($conn, $DATA);
   }
 } else {
   $return['status'] = "error";

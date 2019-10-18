@@ -43,6 +43,17 @@
     }
   }
 
+  // ======================================== Equipment ========================================
+  function get_qeuip_type() {
+    var type = $("#xequip_type").val();
+    
+    var data = {
+      'type': type,
+      'STATUS': 'get_qeuip_type'
+    };
+    senddata(JSON.stringify(data));
+  }
+
   // display
   function senddata(data) {
     var form_data = new FormData();
@@ -79,6 +90,13 @@
             for (var i = 0; i < temp['cnt']; i++) {
               var Str = "<option value='"+temp['car_id'][i]+"'>"+temp['car_licence'][i]+"</option>";
               $("#slc_car").append(Str);
+            }
+          } else if (temp["form"] == 'get_qeuip_type') {
+            $("#xEquip").empty();
+            $("#xEquip").append("<option value=''>ทุกรายการ</option>");
+            for (var i = 0; i < temp['cnt']; i++) {
+              var Str = "<option value='"+temp['xEquip'][i]+"'>"+temp['nEquip'][i]+"</option>";
+              $("#xEquip").append(Str);
             }
           }
         } else if (temp['status'] == "failed") {

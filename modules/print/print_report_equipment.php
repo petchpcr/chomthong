@@ -3,11 +3,11 @@ include '../../function/db_function.php';
 include '../../function/function.php';
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>รายงาน</title>
     <link href="../../assets/plugins/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../../assets/fonts/thsarabunnew/thsarabunnew.css" rel="stylesheet">
@@ -111,91 +111,114 @@ include '../../function/function.php';
             }
 
         }
-
     </style>
 </head>
 
 <body>
 
-<?PHP
-extract($_GET);
-$sql = "SELECT * FROM tb_equipment_lend z inner join tb_equipment a on z.equipment_id = a.equipment_id inner join tb_building_room b on a.building_room_id = b.building_room_id inner join tb_building d on b.building_id = d.building_id where equipment_lend_status = 3 and equipment_lend_date between '{$start}' and '{$end}' ";
-$list = result_array($sql);
-?>
+    <?PHP
+    extract($_GET);
+    $e_type = $_GET['equip_type'];
+    $equip = $_GET['equip'];
+    $start = $_GET['start'];
+    $end = $_GET['end'];
+    $head_type = "";
+    $head_equip = " ทุกรายการ";
+    if ($_GET['equip_type'] != null) {
+        $head_type = $e_type;
+    }
+    if ($_GET['equip'] != null) {
+        $sql = "SELECT equipment_code,equipment_name FROM tb_equipment WHERE equipment_id = '{$equip}'";
+        $e_name = row_array($sql);
+        $head_equip = " ".$e_name['equipment_code']." : ".$e_name['equipment_name'];
+    }
 
-<p class="text-center print" style="padding: 20px;">
-    <button onclick="return window.print();" type="button" class="btn btn-primary"><i class="fa fa-print"></i>
-        Print
-    </button>
-</p>
+    $sql = "SELECT * FROM tb_equipment_lend z 
+            inner join tb_equipment a on z.equipment_id = a.equipment_id 
+            inner join tb_building_room b on a.building_room_id = b.building_room_id 
+            inner join tb_building d on b.building_id = d.building_id 
+            where z.equipment_lend_status = 3 
+            and a.equipment_type like '%{$e_type}%' 
+            and z.equipment_id like '%{$equip}%' 
+            and equipment_lend_date between '{$start}' and '{$end}' 
+            ORDER BY a.equipment_name ASC , a.equipment_code ASC";
+    $list = result_array($sql);
+    ?>
 
-<div class="a4">
-
-    <img src="../../assets/img/logo.jpg" style="width: auto; height: 80px; position: absolute; top: 8px; left: 45px"
-         alt="">
-
-    <h1>รายงานการยืมครุภัณฑ์</h1>
-    <h2>
-        มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง)
-    </h2>
-
-    <p style="position: absolute; top: 12px; right: 20px; font-weight: bold;">
-        พิมพ์วันที่ : <?= date("Y-m-d"); ?>
+    <p class="text-center print" style="padding: 20px;">
+        <button onclick="return window.print();" type="button" class="btn btn-primary"><i class="fa fa-print"></i>
+            Print
+        </button>
     </p>
 
-    <hr>
+    <div class="a4">
 
-    <h2>
-        สถิติการยืมครุภัณฑ์รถประจำวันที่ <?= date_th($start); ?> ถึง <?= date_th($end); ?>
-    </h2>
+        <img src="../../assets/img/logo.jpg" style="width: auto; height: 80px; position: absolute; top: 8px; left: 45px" alt="">
+
+        <h1>รายงานการยืมครุภัณฑ์</h1>
+        <h2>
+            มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง)
+        </h2>
+
+        <p style="position: absolute; top: 12px; right: 20px; font-weight: bold;">
+            พิมพ์วันที่ : <?= date("Y-m-d"); ?>
+        </p>
+
+        <hr>
+
+        <h2>
+            สถิติการยืมครุภัณฑ์รถประจำวันที่ <?= date_th($start); ?> ถึง <?= date_th($end); ?> <br>
+            <?= $head_type.$head_equip; ?>
+        </h2>
 
 
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th width="50" class="text-center">ลำดับ</th>
-            <th class="text-center">รหัสครุภัณฑ์</th>
-            <th class="text-center">รายการ</th>
-            <th class="text-center">หมวดหมู่</th>
-            <th class="text-center">อาคาร</th>
-            <th class="text-center">ผู้ยืม</th>
-        </tr>
-        </thead>
-        <tbody>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th width="50" class="text-center">ลำดับ</th>
+                    <th class="text-center">รหัสครุภัณฑ์</th>
+                    <th class="text-center">รายการ</th>
+                    <th class="text-center">หมวดหมู่</th>
+                    <th class="text-center">อาคาร</th>
+                    <th class="text-center">ผู้ยืม</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        <?PHP foreach ($list as $key => $_list) { ?>
-            <tr>
-                <td class="text-center"><?= $key + 1; ?></td>
-                <td class="text-center"><?= $_list['equipment_code']; ?></td>
-                <td class="text-center"><?= $_list['equipment_name']; ?></td>
-                <td class="text-center"><?= $_list['equipment_type']; ?></td>
-                <td class="text-center"><?= $_list['building_name']; ?></td>
-                <td class="text-center">
-                    <?php $user = get_text_user_id($_list['lender_id']); ?>
+                <?PHP foreach ($list as $key => $_list) { ?>
+                    <tr>
+                        <td class="text-center"><?= $key + 1; ?></td>
+                        <td class="text-center"><?= $_list['equipment_code']; ?></td>
+                        <td class="text-center"><?= $_list['equipment_name']; ?></td>
+                        <td class="text-center"><?= $_list['equipment_type']; ?></td>
+                        <td class="text-center"><?= $_list['building_name']; ?></td>
+                        <td class="text-center">
+                            <?php $user = get_text_user_id($_list['lender_id']); ?>
 
-                    <?= $user['name']; ?> <?= $user['lastname']; ?>
-                </td>
-            </tr>
-        <?PHP } ?>
+                            <?= $user['name']; ?> <?= $user['lastname']; ?>
+                        </td>
+                    </tr>
+                <?PHP } ?>
 
-        <?PHP if (count($list) == 0) { ?>
-            <tr>
-                <td colspan="7" style="color: red; text-align: center;">ไม่พบข้อมูล</td>
-            </tr>
-        <?PHP } ?>
-        </tbody>
-    </table>
+                <?PHP if (count($list) == 0) { ?>
+                    <tr>
+                        <td colspan="7" style="color: red; text-align: center;">ไม่พบข้อมูล</td>
+                    </tr>
+                <?PHP } ?>
+            </tbody>
+        </table>
 
-    <hr>
+        <hr>
 
-    <div class="footer">
-        <hr style="width: 188mm;">
-        มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง) <br>
-        โทรศัพท์ : 0 5392 1444 , โทรสาร : 0 5321 3183
+        <div class="footer">
+            <hr style="width: 188mm;">
+            มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง) <br>
+            โทรศัพท์ : 0 5392 1444 , โทรสาร : 0 5321 3183
+        </div>
+
+
     </div>
 
-
-</div>
-
 </body>
+
 </html>
