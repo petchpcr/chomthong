@@ -28,19 +28,6 @@
 
 <body class="bg-gradient-warning">
 
-    <?PHP
-    if (empty($_GET['module'])) {
-        $module = "home";
-        $action = "index";
-    } else {
-        $module = $_GET['module'];
-        $action = $_GET['action'];
-    }
-
-    include("modules/$module/$action.php");
-
-    ?>
-
     <script>
         $(document).ready(function() {
             $("#hrefModal").on("show.bs.modal", function(e) {
@@ -71,6 +58,19 @@
     </script>
 
     <?PHP include "function/js_function.php"; ?>
+
+    <?PHP
+    if (empty($_GET['module'])) {
+        $module = "home";
+        $action = "index";
+    } else {
+        $module = $_GET['module'];
+        $action = $_GET['action'];
+    }
+
+    include("modules/$module/$action.php");
+
+    ?>
 
     <div class="modal fade" id="hrefModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">

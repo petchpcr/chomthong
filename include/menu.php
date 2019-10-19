@@ -13,7 +13,8 @@
     <li class="nav-item">
       <a class="nav-link" href="#">
         <i class="fa fa-list fa-fw"></i>
-        <span>จัดการหน้าเว็บไซต์</span></a>
+        <span>จัดการหน้าเว็บไซต์</span>
+      </a>
     </li>
 
     <li class="nav-item <?= $_GET['module'] == 'building' ? 'active' : ''; ?>">
@@ -37,10 +38,18 @@
       </div>
     </li>
 
+    <li class="nav-item <?= $_GET['module'] == 'sign' ? 'active' : ''; ?>">
+      <a class="nav-link" href="index.php?module=sign&action=sign_form">
+        <i class="fas fa-signature"></i>
+        <span>จัดการลายเซ็น</span>
+      </a>
+    </li>
+
     <li class="nav-item <?= $_GET['module'] == 'major' ? 'active' : ''; ?>">
       <a class="nav-link" href="index.php?module=major&action=list_major">
         <i class="fas fa-graduation-cap"></i>
-        <span>จัดการหลักสูตร</span></a>
+        <span>จัดการหลักสูตร</span>
+      </a>
     </li>
 
     <!-- ผู้บริหาร -->

@@ -41,6 +41,15 @@
 
       <div class="col text-center" style="display: block">
         <div>
+          <a href="index.php?module=sign&action=sign_form" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
+            <i class="fas fa-signature"></i>
+          </a>
+        </div>
+        <div class="mb-4 text-white">จัดการลายเซ็น</div>
+      </div>
+
+      <div class="col text-center" style="display: block">
+        <div>
           <a href="index.php?module=major&action=list_major" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
             <i class="fa fa-list-alt"></i>
           </a>

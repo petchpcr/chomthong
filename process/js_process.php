@@ -88,6 +88,63 @@ function get_qeuip_type($conn, $DATA)
   die;
 }
 
+// ======================================== Signature ========================================
+function user_sign($conn, $DATA)
+{
+  $idcard = $DATA["idcard"];
+  $return['idcard'] = $idcard;
+  $boolean = false;
+  $Sql = "SELECT manager_name AS sign_name,
+                  manager_lastname AS sign_Lname,
+                  manager_picture AS picture,
+                  signature 
+          FROM tb_manager 
+          WHERE manager_idcard = '$idcard'
+
+          UNION ALL 
+          
+          SELECT personnel_name AS sign_name,
+                  personnel_lastname AS sign_Lname,
+                  personnel_picture AS picture,
+                  signature 
+          FROM tb_personnel 
+          WHERE personnel_idcard = '$idcard'";
+
+  $meQuery = mysqli_query($conn, $Sql);
+  while ($Result = mysqli_fetch_assoc($meQuery)) {
+    $return['sign_name'] = $Result['sign_name'];
+    $return['sign_Lname'] = $Result['sign_Lname'];
+    $return['picture'] = $Result['picture'];
+    $return['signature'] = $Result['signature'];
+    $boolean = true;
+  }
+
+  if ($boolean) {
+    $return['status'] = "success";
+  } else {
+    $return['status'] = "failed";
+  }
+  $return['form'] = "user_sign";
+  echo json_encode($return);
+  mysqli_close($conn);
+  die;
+}
+
+function del_sign($conn, $DATA)
+{
+  $idcard = $DATA["idcard"];
+  $Sql = "UPDATE tb_manager SET signature = null WHERE manager_idcard = '$idcard'";
+  mysqli_query($conn, $Sql);
+  $Sql = "UPDATE tb_personnel SET signature = null WHERE personnel_idcard = '$idcard'";
+  mysqli_query($conn, $Sql);
+
+  $return['status'] = "success";
+  $return['form'] = "del_sign";
+  echo json_encode($return);
+  mysqli_close($conn);
+  die;
+}
+
 
 
 if (isset($_POST['DATA'])) {
@@ -102,6 +159,10 @@ if (isset($_POST['DATA'])) {
     get_car_by_type($conn, $DATA);
   } else if ($DATA['STATUS'] == 'get_qeuip_type') {
     get_qeuip_type($conn, $DATA);
+  } else if ($DATA['STATUS'] == 'user_sign') {
+    user_sign($conn, $DATA);
+  } else if ($DATA['STATUS'] == 'del_sign') {
+    del_sign($conn, $DATA);
   }
 } else {
   $return['status'] = "error";

@@ -114,7 +114,6 @@
 
                   <?PHP $total = $_list['dorm_payment_price'] + $_list['dorm_payment_electric'] + $_list['dorm_payment_water'] + $_list['dorm_payment_other']; ?>
 
-
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -123,6 +122,9 @@
                           <a href="modules/print/print_alert_dorm_payment.php?dorm_payment_id=<?= $_list['dorm_payment_id']; ?>" target="_blank" class="btn btn-primary btn-xs">
                             <i class="fa fa-file-text"></i> ใบแจ้งหนี้
                           </a>
+                          <!-- <button class="btn btn-success">
+                            <i class="fas fa-file-image"></i> หลักฐานการชำระเงิน
+                          </button> -->
                         </th>
                       </tr>
                       <tr>
