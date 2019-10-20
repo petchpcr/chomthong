@@ -3,11 +3,11 @@ include '../../function/db_function.php';
 include '../../function/function.php';
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>รายงาน</title>
     <link href="../../assets/plugins/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../../assets/fonts/thsarabunnew/thsarabunnew.css" rel="stylesheet">
@@ -64,10 +64,15 @@ include '../../function/function.php';
             text-align: center;
         }
 
+        .f-inline {
+            display: inline-flex;
+        }
+
         .sen {
             width: 150px;
             height: 70px;
-            margin: 5px auto;
+            /* margin: 5px auto; */
+            border-bottom: #000 dotted 1px;
         }
 
         .bor_titel {
@@ -83,7 +88,7 @@ include '../../function/function.php';
             height: 80px;
         }
 
-        .car-detail{
+        .car-detail {
             padding: 20px;
         }
 
@@ -130,116 +135,126 @@ include '../../function/function.php';
 
 <body>
 
-<?PHP
-extract($_GET);
-$sql = "SELECT * FROM tb_car_lend a inner join tb_car b on a.car_id = b.car_id inner join tb_driver d on a.driver_id = d.driver_id where car_lend_id = '{$car_lend_id}'";
-$row = row_array($sql);
+    <?PHP
+    extract($_GET);
+    $sql = "SELECT * FROM tb_car_lend a inner join tb_car b on a.car_id = b.car_id inner join tb_driver d on a.driver_id = d.driver_id where car_lend_id = '{$car_lend_id}'";
+    $row = row_array($sql);
 
-$user = get_text_user_id($row['reservations_id']);
-?>
+    $user = get_text_user_id($row['reservations_id']);
+    ?>
 
-<p class="text-center print" style="padding: 20px;">
-    <button onclick="return window.print();" type="button" class="btn btn-primary"><i class="fa fa-print"></i>
-        Print
-    </button>
-</p>
-
-<div class="a4">
-
-
-
-    <h1>
-        <img src="../../assets/img/logo.jpg" style="width: auto; height: 40px;"
-             alt="">
-        เอกสารการเดินรถ
-    </h1>
-    <h2>
-        มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง)
-    </h2>
-
-
-    <p style="position: absolute; top: 12px; right: 20px; font-weight: bold;">
-        พิมพ์วันที่ : <?=date("Y-m-d");?>
+    <p class="text-center print" style="padding: 20px;">
+        <button onclick="return window.print();" type="button" class="btn btn-primary"><i class="fa fa-print"></i>
+            Print
+        </button>
     </p>
 
+    <div class="a4">
 
 
-    <div class="car-detail">
-        <p style="text-indent: 50px;">
-            ใบการจองรถฉบับนี้เป็นเอกสารยืนยันว่า
-            <span style="width: 185px;"><?= $user['name']; ?> <?= $user['lastname']; ?></span>
-            ตำแหน่ง <span style="width: 150px;"><?= status($user['status']); ?></span>
-        </p>
-        <p>
-            ได้ทำการจอง
-            <span style="width: 300px;">
-                <?= get_car_type_name($row['car_type_id']); ?> <?= $row['car_brand']; ?> <?= $row['car_model']; ?>
-            </span>
-            ป้ายทะเบียน
-            <span style="width: 210px;"><?= $row['car_licence']; ?></span>
-        </p>
 
-        <p>
-            ไปยังสถานที่
-            <span style="width: 594px;"><?= $row['car_lend_place']; ?></span>
+        <h1>
+            <img src="../../assets/img/logo.jpg" style="width: auto; height: 40px;" alt="">
+            เอกสารการเดินรถ
+        </h1>
+        <h2>
+            มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง)
+        </h2>
+
+
+        <p style="position: absolute; top: 12px; right: 20px; font-weight: bold;">
+            พิมพ์วันที่ : <?= date("Y-m-d"); ?>
         </p>
 
-        <p>
-            โดยมีจุดประสงค์เพื่อ
-            <span style="width: 542px;"><?= $row['car_lend_objective']; ?></span>
-        </p>
 
-        <p>
-            ผู้ขับ
-            <span style="width: 375px;">
-                <?= $row['driver_title']; ?><?= $row['driver_name']; ?> <?= $row['driver_lastname']; ?>
-            </span>
-            โดยมีผู้โดยสารทั้งหมด
-            <span style="width: 102px;"><?= $row['car_lend_people']; ?></span>
-            คน
-        </p>
 
-        <p>
-            ในวันที่
-            <?= datetime_car_lend($row['car_lend_starttime']); ?>
-        </p>
+        <div class="car-detail">
+            <p style="text-indent: 50px;">
+                ใบการจองรถฉบับนี้เป็นเอกสารยืนยันว่า
+                <span style="width: 185px;"><?= $user['name']; ?> <?= $user['lastname']; ?></span>
+                ตำแหน่ง <span style="width: 150px;"><?= status($user['status']); ?></span>
+            </p>
+            <p>
+                ได้ทำการจอง
+                <span style="width: 300px;">
+                    <?= get_car_type_name($row['car_type_id']); ?> <?= $row['car_brand']; ?> <?= $row['car_model']; ?>
+                </span>
+                ป้ายทะเบียน
+                <span style="width: 210px;"><?= $row['car_licence']; ?></span>
+            </p>
 
-        <p>
-            ถึงวันที่
-            <?= datetime_car_lend($row['car_lend_endtime']); ?>
-        </p>
+            <p>
+                ไปยังสถานที่
+                <span style="width: 594px;"><?= $row['car_lend_place']; ?></span>
+            </p>
 
-        <?PHP
-        $user_approve = $row['user_approve'];
-        $Sql = "SELECT personnel_name AS sign_name,
+            <p>
+                โดยมีจุดประสงค์เพื่อ
+                <span style="width: 542px;"><?= $row['car_lend_objective']; ?></span>
+            </p>
+
+            <p>
+                ผู้ขับ
+                <span style="width: 375px;">
+                    <?= $row['driver_title']; ?><?= $row['driver_name']; ?> <?= $row['driver_lastname']; ?>
+                </span>
+                โดยมีผู้โดยสารทั้งหมด
+                <span style="width: 102px;"><?= $row['car_lend_people']; ?></span>
+                คน
+            </p>
+
+            <p>
+                ในวันที่
+                <?= datetime_car_lend($row['car_lend_starttime']); ?>
+            </p>
+
+            <p>
+                ถึงวันที่
+                <?= datetime_car_lend($row['car_lend_endtime']); ?>
+            </p>
+
+            <?PHP
+            $user_approve = $row['user_approve'];
+            $Sql = "SELECT personnel_name AS sign_name,
                         personnel_lastname AS sign_Lname,
                         personnel_title AS sign_title,
+                        position_type,
                         signature 
                 FROM tb_personnel 
+                INNER JOIN tb_position ON tb_position.position_id = tb_personnel.position_id 
                 WHERE personnel_idcard = '$user_approve'";
-        $sign = row_array($Sql);
-        ?>
+            $sign = row_array($Sql);
+            ?>
 
-        <div class="sign_zone">
-            <div class="sen">
-                <?= $sign['signature']; ?>
+            <div class="sign_zone">
+                <div class="f-inline">
+                    <div style="align-self: flex-end !important;">
+                        ลงชื่อ</div>
+                    <div class="sen">
+                        <?= $sign['signature']; ?>
+                    </div>
+                    <div style="align-self: flex-end !important;">
+                        ผู้อนุมัติ
+                    </div>
+                </div>
+                <center>
+                    <div style="margin:10px 0;">(<?= $sign['sign_title'] . $sign['sign_name'] . " " . $sign['sign_Lname']; ?>)</div>
+                    <div style="margin-bottom:10px;">ตำแหน่ง<?= $sign['position_type']; ?></div>
+                    <div>ผู้มีอำนาจอนุญาติให้ใช้รถ</div>
+                </center>
             </div>
-            <center>
-                <div style="margin-bottom:5px;">(<?= $sign['sign_title'] . $sign['sign_name'] . " " . $sign['sign_Lname']; ?>)</div>
-                <div>เจ้าหน้าที่ผู้อนุมัติการใช้งานรถ</div>
-            </center>
         </div>
+
+
+        <div class="footer">
+            <hr style="width: 188mm;">
+            มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง) <br>
+            โทรศัพท์ : 0 5392 1444 , โทรสาร : 0 5321 3183
+        </div>
+
+
     </div>
-
-
-    <div class="footer">
-        <hr style="width: 188mm;">
-        มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง) <br>
-        โทรศัพท์ : 0 5392 1444 , โทรสาร : 0 5321 3183
-    </div>
-
-
-</div>
 
 </body>
+
 </html>

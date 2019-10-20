@@ -63,10 +63,15 @@ include '../../function/function.php';
             text-align: center;
         }
 
+        .f-inline {
+            display: inline-flex;
+        }
+
         .sen {
             width: 150px;
             height: 70px;
-            margin: 5px auto;
+            /* margin: 5px auto; */
+            border-bottom: #000 dotted 1px;
         }
 
         .bor_titel {
@@ -221,12 +226,18 @@ include '../../function/function.php';
         ?>
 
         <div class="sign_zone">
-            <div class="sen">
-                <?= $sign['signature']; ?>
+            <div class="f-inline">
+                <div style="align-self: flex-end !important;">
+                    ลงชื่อ</div>
+                <div class="sen">
+                    <?= $sign['signature']; ?>
+                </div>
+                <div style="align-self: flex-end !important;">
+                    เจ้าหน้าที่
+                </div>
             </div>
             <center>
-                <div style="margin-bottom:5px;">(<?= $sign['sign_title'] . $sign['sign_name'] . " " . $sign['sign_Lname']; ?>)</div>
-                <div>เจ้าหน้าที่ดูแลหอพัก</div>
+                <div style="margin:10px 0;">(<?= $sign['sign_title'] . $sign['sign_name'] . " " . $sign['sign_Lname']; ?>)</div>
             </center>
         </div>
     </div>
