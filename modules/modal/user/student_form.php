@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
   <div class="col-md-12">
     <div class="form-group">
       <label>เลขบัตรประชาชน :</label>
-      <input type="text" class="form-control" name="idcard" maxlength="13" value="<?= $idcard; ?>" required>
+      <input type="text" class="form-control" name="idcard" minlength="13" maxlength="13" value="<?= $idcard; ?>" required>
     </div>
   </div>
 

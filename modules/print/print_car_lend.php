@@ -56,14 +56,18 @@ include '../../function/function.php';
 
         }
 
-        .sen {
-            width: 300px;
-            height: 75px;
-            font-size: 12px;
-            text-align: center;
-            line-height: 18px;
-            padding-top: 50px;
+        .sign_zone {
+            margin-top: 20px;
+            margin-right: 20px;
             float: right;
+            /* border: #000 solid 1px; */
+            text-align: center;
+        }
+
+        .sen {
+            width: 150px;
+            height: 70px;
+            margin: 5px auto;
         }
 
         .bor_titel {
@@ -117,6 +121,10 @@ include '../../function/function.php';
             }
         }
 
+        svg {
+            width: 150px;
+            height: 70px;
+        }
     </style>
 </head>
 
@@ -201,17 +209,25 @@ $user = get_text_user_id($row['reservations_id']);
             <?= datetime_car_lend($row['car_lend_endtime']); ?>
         </p>
 
+        <?PHP
+        $user_approve = $row['user_approve'];
+        $Sql = "SELECT personnel_name AS sign_name,
+                        personnel_lastname AS sign_Lname,
+                        personnel_title AS sign_title,
+                        signature 
+                FROM tb_personnel 
+                WHERE personnel_idcard = '$user_approve'";
+        $sign = row_array($Sql);
+        ?>
 
-
-        <div class="sen" style="line-height: 22px;">
-            <?PHP
-            $sql = "SELECT * FROM tb_manager where delete_data = 0";
-            $manager = row_array($sql);
-            ?>
-            ชื่อ....................................................................ผู้อนุมัติ <br>
-            ( <?= $manager['manager_title']; ?><?= $manager['manager_name']; ?> <?= $manager['manager_lastname']; ?> ) <br>
-            ผู้บริหาร  <br>
-            ผู้มีอำนาจให้ใช้รถ <br>
+        <div class="sign_zone">
+            <div class="sen">
+                <?= $sign['signature']; ?>
+            </div>
+            <center>
+                <div style="margin-bottom:5px;">(<?= $sign['sign_title'] . $sign['sign_name'] . " " . $sign['sign_Lname']; ?>)</div>
+                <div>เจ้าหน้าที่ผู้อนุมัติการใช้งานรถ</div>
+            </center>
         </div>
     </div>
 

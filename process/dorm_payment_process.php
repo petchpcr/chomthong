@@ -5,10 +5,9 @@ include '../function/function.php';
 
 
 extract($_POST);
-
+$user_idcard = $_SESSION['idcard'];
 
 if (empty($dorm_payment_id)) {
-
 
     $data = array(
         "dorm_payment_price" => $dorm_payment_price,
@@ -20,6 +19,7 @@ if (empty($dorm_payment_id)) {
         "dorm_payment_year" => $dorm_payment_year,
         "dorm_payment_date_invoice" => date("Y-m-d H:i:s"),
         "dorm_room_id" => $dorm_room_id,
+        "user_approve" => $user_idcard,
         "dorm_payment_status" => 0
     );
 
@@ -29,7 +29,6 @@ if (empty($dorm_payment_id)) {
 
 } else {
 
-
     $data = array(
         "dorm_payment_price" => $dorm_payment_price,
         "dorm_payment_electric" => $dorm_payment_electric,
@@ -38,7 +37,8 @@ if (empty($dorm_payment_id)) {
         "dorm_payment_msg" => $dorm_payment_msg,
         "dorm_payment_month" => $dorm_payment_month,
         "dorm_payment_year" => $dorm_payment_year,
-        "dorm_room_id" => $dorm_room_id
+        "dorm_room_id" => $dorm_room_id,
+        "user_approve" => $user_idcard
     );
 
     update("tb_dorm_payment", $data, "dorm_payment_id = {$dorm_payment_id}");

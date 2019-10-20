@@ -5,9 +5,11 @@ include '../function/function.php';
 
 
 extract($_GET);
+$user_idcard = $_SESSION['idcard'];
 
 $data = array(
-    "car_lend_status" => $status
+    "car_lend_status" => $status,
+    "user_approve" => $user_idcard
 );
 
 update("tb_car_lend", $data,"car_lend_id = {$id}");

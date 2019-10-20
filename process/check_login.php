@@ -24,6 +24,7 @@ if($row > 0){
 
     if($row){
         $id = "M-".$row['manager_id'];
+        $idcard = $row['manager_idcard'];
         $name = $row['manager_name']." ".$row['manager_lastname'];
         $picture = $row['manager_picture'];
         $position = $row['position_id'];
@@ -46,6 +47,7 @@ if($row > 0){
 
             if($row){
                 $id = "P-".$row['personnel_id'];
+                $idcard = $row['personnel_idcard'];
                 $name = $row['personnel_name']." ".$row['personnel_lastname'];
                 $picture = $row['personnel_picture'];
                 $position = $row['position_id'];
@@ -71,6 +73,7 @@ if($row > 0){
 }
 
 $_SESSION['id'] = $id;
+$_SESSION['idcard'] = $idcard;
 $_SESSION['name'] = $name;
 $_SESSION['picture'] = $picture;
 $_SESSION['status'] = $status;

@@ -3,11 +3,11 @@ include '../../function/db_function.php';
 include '../../function/function.php';
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>รายงาน</title>
     <link href="../../assets/plugins/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="../../assets/fonts/thsarabunnew/thsarabunnew.css" rel="stylesheet">
@@ -54,14 +54,18 @@ include '../../function/function.php';
             display: inline-block;
         }
 
-        .sen {
-            width: 300px;
-            height: 75px;
-            font-size: 12px;
-            text-align: center;
-            line-height: 18px;
-            padding-top: 50px;
+        .sign_zone {
+            margin-top: 20px;
+            margin-right: 20px;
             float: right;
+            /* border: #000 solid 1px; */
+            text-align: center;
+        }
+
+        .sen {
+            width: 150px;
+            height: 70px;
+            margin: 5px auto;
         }
 
         .bor_titel {
@@ -88,131 +92,147 @@ include '../../function/function.php';
             }
         }
 
+        svg {
+            width: 150px;
+            height: 70px;
+        }
     </style>
 </head>
 
 <body>
 
-<?PHP
-extract($_GET);
-$sql = "SELECT * FROM tb_dorm_payment a inner join tb_dorm_room b on a.dorm_room_id = b.dorm_room_id inner join tb_dorm d on b.dorm_id = d.dorm_id WHERE dorm_payment_id = '{$dorm_payment_id}'";
-$row = row_array($sql);
-?>
-
-<p class="text-center print" style="padding: 20px;">
-    <button onclick="return window.print();" type="button" class="btn btn-primary"><i class="fa fa-print"></i>
-        Print
-    </button>
-</p>
-
-<div class="a4">
-
-    <img src="../../assets/img/logo.jpg" style="width: auto; height: 80px; position: absolute; top: 8px; left: 45px"
-         alt="">
-
-    <h1>ใบเสร็จรับเงินค่าหอพัก</h1>
-    <h2>
-        มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง)
-    </h2>
-
-    <p style="position: absolute; top: 12px; right: 20px; font-weight: bold;">
-        พิมพ์วันที่ : <?= date("Y-m-d"); ?>
-    </p>
-
-    <hr>
-
     <?PHP
-    $sql = "SELECT * FROM tb_roomer where dorm_room_id = '{$row['dorm_room_id']}' AND roomer_status < 5";
-    $cc = result_array($sql);
+    extract($_GET);
+    $sql = "SELECT * FROM tb_dorm_payment a inner join tb_dorm_room b on a.dorm_room_id = b.dorm_room_id inner join tb_dorm d on b.dorm_id = d.dorm_id WHERE dorm_payment_id = '{$dorm_payment_id}'";
+    $row = row_array($sql);
     ?>
 
-    <p>
-        <b>ชื่อผู้เช่า :</b>
-        <span style="width: 650px;">
-        <?PHP foreach ($cc as $key => $_cc) { ?>
-            <?PHP
-            $user = get_text_user_id($_cc['renter_id']);
+    <p class="text-center print" style="padding: 20px;">
+        <button onclick="return window.print();" type="button" class="btn btn-primary"><i class="fa fa-print"></i>
+            Print
+        </button>
+    </p>
 
-            if ($key != 0) {
-                echo " , ";
-            }
+    <div class="a4">
 
-            ?>
+        <img src="../../assets/img/logo.jpg" style="width: auto; height: 80px; position: absolute; top: 8px; left: 45px" alt="">
 
-            <?= $user['name']; ?> <?= $user['lastname']; ?>
-        <?PHP } ?>
+        <h1>ใบเสร็จรับเงินค่าหอพัก</h1>
+        <h2>
+            มหาวิทยาลัยเทคโนโลยีราชมงคลล้านนา ศูนย์การจัดการศึกษาพิเศษ (จอมทอง)
+        </h2>
+
+        <p style="position: absolute; top: 12px; right: 20px; font-weight: bold;">
+            พิมพ์วันที่ : <?= date("Y-m-d"); ?>
+        </p>
+
+        <hr>
+
+        <?PHP
+        $sql = "SELECT * FROM tb_roomer where dorm_room_id = '{$row['dorm_room_id']}' AND roomer_status < 5";
+        $cc = result_array($sql);
+        ?>
+
+        <p>
+            <b>ชื่อผู้เช่า :</b>
+            <span style="width: 650px;">
+                <?PHP foreach ($cc as $key => $_cc) { ?>
+                    <?PHP
+                        $user = get_text_user_id($_cc['renter_id']);
+
+                        if ($key != 0) {
+                            echo " , ";
+                        }
+
+                        ?>
+
+                    <?= $user['name']; ?> <?= $user['lastname']; ?>
+                <?PHP } ?>
             </span>
-    </p>
-    <p>
-        <b >หอพัก :</b>
-        <span style="width: 318px;"><?= $row['dorm_name']; ?></span>
-        <b>ห้อง :</b>
-        <span style="width: 80px;"><?= $row['dorm_room_name']; ?></span>
+        </p>
+        <p>
+            <b>หอพัก :</b>
+            <span style="width: 318px;"><?= $row['dorm_name']; ?></span>
+            <b>ห้อง :</b>
+            <span style="width: 80px;"><?= $row['dorm_room_name']; ?></span>
 
-        <b>ประจำเดือน :</b>
-        <span style="width: 130px;">
-            <?=month_name($row['dorm_payment_month']);?>
-            <?=$row['dorm_payment_year'] + 543;?>
-        </span>
-    </p>
+            <b>ประจำเดือน :</b>
+            <span style="width: 130px;">
+                <?= month_name($row['dorm_payment_month']); ?>
+                <?= $row['dorm_payment_year'] + 543; ?>
+            </span>
+        </p>
 
-    <table class="table table-bordered">
-        <tr>
-            <th class="text-center" width="50">ลำดับ</th>
-            <th class="text-center">รายการ</th>
-            <th class="text-center" width="150">จำนวนเงิน</th>
-        </tr>
-        <tr>
-            <td class="text-center">1</td>
-            <td>ค่าห้องพัก</td>
-            <td class="text-center"><?=number_format($row['dorm_payment_price'])?> บาท</td>
-        </tr>
-        <tr>
-            <td class="text-center">2</td>
-            <td>ค่าไฟ</td>
-            <td class="text-center"><?=number_format($row['dorm_payment_electric'])?> บาท</td>
-        </tr>
-        <tr>
-            <td class="text-center">3</td>
-            <td>ค่าน้ำ</td>
-            <td class="text-center"><?=number_format($row['dorm_payment_water'])?> บาท</td>
-        </tr>
-        <tr>
-            <td class="text-center">4</td>
-            <td>อื่นๆ</td>
-            <td class="text-center"><?=number_format($row['dorm_payment_other'])?> บาท</td>
-        </tr>
-        <tr>
-            <?PHP $total = $row['dorm_payment_price'] + $row['dorm_payment_electric'] + $row['dorm_payment_water'] + $row['dorm_payment_other']; ?>
-            <th colspan="2" class="text-right">รวมทั้งหมด</th>
-            <td class="text-center"><?=number_format($total)?> บาท</td>
-        </tr>
-    </table>
+        <table class="table table-bordered">
+            <tr>
+                <th class="text-center" width="50">ลำดับ</th>
+                <th class="text-center">รายการ</th>
+                <th class="text-center" width="150">จำนวนเงิน</th>
+            </tr>
+            <tr>
+                <td class="text-center">1</td>
+                <td>ค่าห้องพัก</td>
+                <td class="text-center"><?= number_format($row['dorm_payment_price']) ?> บาท</td>
+            </tr>
+            <tr>
+                <td class="text-center">2</td>
+                <td>ค่าไฟ</td>
+                <td class="text-center"><?= number_format($row['dorm_payment_electric']) ?> บาท</td>
+            </tr>
+            <tr>
+                <td class="text-center">3</td>
+                <td>ค่าน้ำ</td>
+                <td class="text-center"><?= number_format($row['dorm_payment_water']) ?> บาท</td>
+            </tr>
+            <tr>
+                <td class="text-center">4</td>
+                <td>อื่นๆ</td>
+                <td class="text-center"><?= number_format($row['dorm_payment_other']) ?> บาท</td>
+            </tr>
+            <tr>
+                <?PHP $total = $row['dorm_payment_price'] + $row['dorm_payment_electric'] + $row['dorm_payment_water'] + $row['dorm_payment_other']; ?>
+                <th colspan="2" class="text-right">รวมทั้งหมด</th>
+                <td class="text-center"><?= number_format($total) ?> บาท</td>
+            </tr>
+        </table>
 
-    <p>
-        <b>หมายเหตุ</b>
-        <span style="width: 645px;">
-            <?=$row['dorm_payment_msg']?>
-        </span>
-    </p>
+        <p>
+            <b>หมายเหตุ</b>
+            <span style="width: 645px;">
+                <?= $row['dorm_payment_msg'] ?>
+            </span>
+        </p>
+
+        <?PHP
+        $user_approve = $row['user_approve'];
+        $Sql = "SELECT personnel_name AS sign_name,
+                        personnel_lastname AS sign_Lname,
+                        personnel_title AS sign_title,
+                        signature 
+                FROM tb_personnel 
+                WHERE personnel_idcard = '$user_approve'";
+        $sign = row_array($Sql);
+        ?>
+
+        <div class="sign_zone">
+            <div class="sen">
+                <?= $sign['signature']; ?>
+            </div>
+            <center>
+                <div style="margin-bottom:5px;">(<?= $sign['sign_title'] . $sign['sign_name'] . " " . $sign['sign_Lname']; ?>)</div>
+                <div>เจ้าหน้าที่ดูแลหอพัก</div>
+            </center>
+        </div>
+        <!-- <div class="sen">
+            <div style="margin-bottom:10px;">ชื่อ....................................................................เจ้าหน้าที่</div>
+            <center>
+                <div style="display:inline-flex">(<div style="width:230px;"></div>)</div>
+            </center>
+        </div> -->
 
 
-    <div class="sen">
-        ชื่อ....................................................................เจ้าหน้าที่ <br>
-        (
-        &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp;
-        &nbsp; &nbsp; &nbsp;
-        )
     </div>
 
-
-</div>
-
 </body>
+
 </html>
