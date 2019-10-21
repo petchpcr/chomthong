@@ -72,7 +72,7 @@ if (isset($_GET['id'])) {
     <div class="form-group">
       <label>หลักสูตร</label>
       <?PHP
-      $sql = "SELECT * FROM tb_major";
+      $sql = "SELECT * FROM tb_major WHERE delete_data  = 0";
       $result = result_array($sql);
       ?>
       <select name="major_id" class="form-control" required>
@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
   <div class="col-md-12">
     <div class="form-group">
       <label>เลขบัตรประชาชน :</label>
-      <input type="text" class="form-control" name="idcard" minlength="13" maxlength="13" value="<?= $idcard; ?>" required>
+      <input type="text" class="form-control numberOnly" name="idcard" minlength="13" maxlength="13" value="<?= $idcard; ?>" required>
     </div>
   </div>
 
@@ -137,7 +137,7 @@ if (isset($_GET['id'])) {
   <div class="col-md-6">
     <div class="form-group">
       <label>เบอร์โทร :</label>
-      <input type="text" class="form-control" name="telephone" maxlength="10" value="<?= $telephone; ?>" required>
+      <input type="text" class="form-control numberOnly" name="telephone" maxlength="10" value="<?= $telephone; ?>" required>
     </div>
   </div>
 

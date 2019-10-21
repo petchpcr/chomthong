@@ -37,18 +37,35 @@
             $list = result_array($sql);
             ?>
 
-            <?PHP if (count($list) > 0) { ?>
+            <?PHP if (count($list) > 0) {
+              $App_Title = "ยืนยันการอนุมัติ";
+              $App_Text = "แน่ใจหรือไม่ว่าต้องการอนุมัติทั้งหมด ?";
+              $App_Color = "#1cc88a";
+              $App_Link = "process/update_all_roomer.php?status=1";
+
+              $Un_Title = "ยืนยันการไม่อนุมัติ";
+              $Un_Text = "แน่ใจหรือไม่ว่าต้องการไม่อนุมัติทั้งหมด ?";
+              $Un_Color = "#d33";
+              $Un_Link = "process/update_all_roomer.php?status=9";
+              ?>
               <hr>
 
               <center>
-                <a href="process/update_all_roomer.php?status=1" class="btn btn-success btn-lg" onclick="return confirm('ยืนยันการอนุมัติทั้งหมด?');">อนุมัติทั้งหมด</a>
-                <a href="process/update_all_roomer.php?status=9" class="btn btn-danger btn-lg" onclick="return confirm('ยืนยันการไม่อนุมัติทั้งหมด?');">ไม่อนุมัติทั้งหมด</a>
+                <button class="btn btn-success btn-lg" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">อนุมัติทั้งหมด</button>
+                <button class="btn btn-danger btn-lg" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">ไม่อนุมัติทั้งหมด</button>
               </center>
 
               <hr>
             <?PHP } ?>
 
-            <?PHP foreach ($list as $key => $_list) { ?>
+            <?PHP foreach ($list as $key => $_list) {
+              $user = get_text_user_id($_list['renter_id']);
+              $App_Text = $_list['dorm_name'] . " ห้อง " . $_list['dorm_room_name'] . " : " . $user['name'] . " " . $user['lastname'] . " อนุมัติ ?";
+              $App_Link = "process/update_roomer.php?status=1&id=" . $_list['roomer_id'] . "&dorm_room_id=" . $_list['dorm_room_id'];
+
+              $Un_Text = $_list['dorm_name'] . " ห้อง " . $_list['dorm_room_name'] . " : " . $user['name'] . " " . $user['lastname'] . " ไม่อนุมัติ ?";
+              $Un_Link = "process/update_roomer.php?status=9&id=" . $_list['roomer_id'] . "&dorm_room_id=" . $_list['dorm_room_id'];
+              ?>
               <tr>
                 <td class="text-center"><?= $key + 1; ?></td>
                 <td class="text-center"><?= $_list['dorm_name']; ?></td>
@@ -62,14 +79,14 @@
                   </a>
                 </td>
                 <td class="text-center">
-                  <a href="process/update_roomer.php?status=1&id=<?= $_list['roomer_id']; ?>&dorm_room_id=<?= $_list['dorm_room_id']; ?>" class="btn btn-success" style="width: 100%;" onclick="return confirm('ยืนยันการอนุมัติ?');">
+                  <button class="btn btn-success" style="width: 100%;" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">
                     <i class="fa fa-check"></i>
-                  </a>
+                  </button>
                 </td>
                 <td class="text-center">
-                  <a href="process/update_roomer.php?status=9&id=<?= $_list['roomer_id']; ?>&dorm_room_id=<?= $_list['dorm_room_id']; ?>" class="btn btn-danger" style="width: 100%;" onclick="return confirm('ยืนยันการไม่อนุมัติ?');">
+                  <button class="btn btn-danger" style="width: 100%;" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">
                     <i class="fa fa-times"></i>
-                  </a>
+                  </button>
                 </td>
               </tr>
             <?PHP } ?>

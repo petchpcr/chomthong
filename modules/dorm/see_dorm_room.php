@@ -46,7 +46,7 @@
           $sql = "SELECT DISTINCT SUBSTRING(a.dorm_room_name,1,1) as dorm_room_name FROM tb_dorm_room a inner join tb_dorm b on a.dorm_id = b.dorm_id where a.delete_data = 0 and a.dorm_id = '{$dorm_id}' ORDER BY a.dorm_room_name ASC";
           $list_floor = result_array($sql);
           ?>
-          <select id="dorm_room_floor" class="form-control">
+          <select id="dorm_room_floor" class="form-control" data-dorm="<?= $dorm_id; ?>">
             <option value="">ทุกชั้น</option>
             <?PHP foreach ($list_floor as $key => $_floor) { ?>
               <option <?= $floor == $_floor['dorm_room_name'] ? "selected" : "" ?> value="<?= $_floor['dorm_room_name'] ?>">

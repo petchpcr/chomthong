@@ -78,7 +78,12 @@
         ?>
 
 
-        <?PHP foreach ($list as $key => $_list) { ?>
+        <?PHP foreach ($list as $key => $_list) { 
+          $Title = "ยืนยันการลบ";
+          $Text = "ต้องการลบห้อง ".$_list['dorm_room_name']." หรือไม่ ?";
+          $Color = "#d33";
+          $Link = "process/delete.php?table=tb_dorm_room&ff=dorm_room_id&id=" . $_list['dorm_room_id'];
+          ?>
 
           <div class="col" style="max-width:250px; min-width:250px;">
             <div class="list-driver">
@@ -90,9 +95,9 @@
               <a data-remote="false" data-toggle="modal" data-target="#hrefModal" href="index.php?module=modal&action=dorm/dorm_room_form&dorm_id=<?= $dorm_id; ?>&id=<?= $_list['dorm_room_id']; ?>" class="btn btn-sm btn-warning btn-rounded">
                 <i class="fa fa-edit"></i>
               </a>
-              <a href="process/delete.php?table=tb_dorm_room&ff=dorm_room_id&id=<?= $_list['dorm_room_id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('ยืนยันการลบ?');">
+              <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                 <i class="fa fa-times"></i>
-              </a>
+              </button>
               <a data-remote="false" data-toggle="modal" data-target="#hrefModal" href="index.php?module=modal&action=dorm/dorm_room_detail&dorm_id=<?= $dorm_id; ?>&id=<?= $_list['dorm_room_id']; ?>" class="btn btn-sm btn-info btn-rounded">
                 <i class="fa fa-eye"></i>
               </a>

@@ -39,11 +39,21 @@
               $list = result_array($sql);
               ?>
 
-              <?PHP foreach ($list as $key => $_list) { ?>
+              <?PHP foreach ($list as $key => $_list) {
+                $user = get_text_user_id($_list['renter_id']);
+                $App_Title = "ยืนยันการอนุมัติ";
+                $App_Text = $_list['dorm_name'] . " ห้อง " . $_list['dorm_room_name'] . " : " . $user['name'] . " " . $user['lastname'] . " อนุมัติ ?";
+                $App_Color = "#1cc88a";
+                $App_Link = "process/update_roomer.php?status=3&id=" . $_list['roomer_id'] . "&dorm_room_id=" . $_list['dorm_room_id'];
+
+                $Un_Title = "ยืนยันการไม่อนุมัติ";
+                $Un_Text = $_list['dorm_name'] . " ห้อง " . $_list['dorm_room_name'] . " : " . $user['name'] . " " . $user['lastname'] . " ไม่อนุมัติ ?";
+                $Un_Color = "#d33";
+                $Un_Link = "process/update_roomer.php?status=1&id=" . $_list['roomer_id'] . "&dorm_room_id=" . $_list['dorm_room_id'];
+                ?>
                 <tr>
                   <td class="text-center"><?= $key + 1; ?></td>
                   <td class="text-center"><?= $_list['dorm_name']; ?></td>
-                  <?php $user = get_text_user_id($_list['renter_id']); ?>
                   <td class="text-center"><?= $_list['dorm_room_name']; ?></td>
                   <td class="text-center"><?= $user['name'] . " " . $user['lastname']; ?></td>
                   <td class="text-center"><?= date_format(date_create($_list['roomer_date_out']), "d/m/Y") ?></td>
@@ -53,14 +63,14 @@
                     </a>
                   </td>
                   <td class="text-center">
-                    <a href="process/update_roomer.php?status=3&id=<?= $_list['roomer_id']; ?>&dorm_room_id=<?= $_list['dorm_room_id']; ?>" class="btn btn-success" style="width: 100%;" onclick="return confirm('ยืนยันการอนุมัติ?');">
+                    <button class="btn btn-success" style="width: 100%;" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">
                       <i class="fa fa-check"></i>
-                    </a>
+                    </button>
                   </td>
                   <td class="text-center">
-                    <a href="process/update_roomer.php?status=1&id=<?= $_list['roomer_id']; ?>&dorm_room_id=<?= $_list['dorm_room_id']; ?>" class="btn btn-danger" style="width: 100%;" onclick="return confirm('ยืนยันการไม่อนุมัติ?');">
+                    <button class="btn btn-danger" style="width: 100%;" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">
                       <i class="fa fa-times"></i>
-                    </a>
+                    </button>
                   </td>
                 </tr>
               <?PHP } ?>

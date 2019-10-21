@@ -148,7 +148,12 @@
               </thead>
               <tbody>
                 <?PHP foreach ($list as $key => $_list) { ?>
-                  <?PHP $total = $_list['dorm_payment_price'] + $_list['dorm_payment_electric'] + $_list['dorm_payment_water'] + $_list['dorm_payment_other']; ?>
+                  <?PHP $total = $_list['dorm_payment_price'] + $_list['dorm_payment_electric'] + $_list['dorm_payment_water'] + $_list['dorm_payment_other']; 
+                  $Title = "ยืนยันการชำระเงิน";
+                  $Text = $_list['dorm_name']." ห้อง ".$_list['dorm_room_name']." จ่ายค่าหอแล้วใช่หรือไม่ ?";
+                  $Color = "#4e73df";
+                  $Link = "process/update_dorm_payment.php?status=1&id=" . $_list['dorm_payment_id'];
+                  ?>
                   <tr>
                     <td class="text-center"><?= $key + 1; ?></td>
                     <td class="text-left">
@@ -174,9 +179,9 @@
                       <a data-remote="false" data-toggle="modal" data-target="#hrefModal" class="btn btn-sm btn-info" href="index.php?module=modal&action=dorm/dorm_payment_room_detail&dorm_payment_id=<?= $_list['dorm_payment_id']; ?>">
                         รายละเอียด
                       </a>
-                      <a href="process/update_dorm_payment.php?status=1&id=<?= $_list['dorm_payment_id']; ?>" class="btn btn-sm btn-success" onclick="return confirm('ยืนยันการทำรายการ?');">
+                      <button class="btn btn-sm btn-success" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                         ชำระเงิน
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 <?PHP } ?>

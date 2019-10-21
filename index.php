@@ -42,17 +42,20 @@
 
             $('#dorm_room_floor').on('change', function() {
                 var floor = this.value;
-                window.location.href = "index.php?module=dorm&action=see_dorm_room&dorm_id=<?= $dorm_id; ?>&floor=" + floor;
+                var dorm_id = $(this).data("dorm");
+                window.location.href = "index.php?module=dorm&action=see_dorm_room&dorm_id="+dorm_id+"&floor=" + floor;
             });
 
             $('#booking_dorm_room_floor').on('change', function() {
                 var floor = this.value;
-                window.location.href = "index.php?module=dorm&action=booking_dorm_room&dorm_id=<?= $dorm_id; ?>&floor=" + floor;
+                var dorm_id = $(this).data("dorm");
+                window.location.href = "index.php?module=dorm&action=booking_dorm_room&dorm_id="+dorm_id+"&floor=" + floor;
             });
 
             $('#list_dorm_room_floor').on('change', function() {
                 var floor = this.value;
-                window.location.href = "index.php?module=dorm&action=list_dorm_room&dorm_id=<?= $dorm_id; ?>&floor=" + floor;
+                var dorm_id = $(this).data("dorm");
+                window.location.href = "index.php?module=dorm&action=list_dorm_room&dorm_id="+dorm_id+"&floor=" + floor;
             });
         });
     </script>

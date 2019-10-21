@@ -1,11 +1,27 @@
 <script>
   // ======================================== Main ========================================
+  function AlertConLink(Title, Text, Color, Link) {
+    swal({
+      title: Title,
+      text: Text,
+      type: "question",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: Color,
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      window.location.href = Link;
+    })
+  }
+
   function AlertError(Title, Text, Type) {
     swal({
       title: Title,
       text: Text,
       type: Type,
       showConfirmButton: true,
+      confirmButtonColor: "#4e73df",
       confirmButtonText: 'ตกลง'
     })
   }

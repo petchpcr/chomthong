@@ -14,19 +14,19 @@ $photo = result_array($sql);
 ?>
 <?PHP foreach ($photo as $key => $p) { ?>
     <?PHP
-    $style = 'style="width: 80px; height: 80px; float: left; padding: 0; margin: 5px;"';
+        $style = 'style="width: 80px; height: 80px; float: left; padding: 0; margin: 5px;"';
 
-    if ($key == 0) {
-        $style = 'style="width: 50%; height: auto; margin:0 auto;"';
-    }
-    ?>
+        if ($key == 0) {
+            $style = 'style="width: 50%; height: auto; margin:0 auto;"';
+        }
+        ?>
     <div class="thumbnail" <?= $style; ?>>
         <div class="caption">
-                        <span id="image<?= $key; ?>">
-                            <a href="uploads/<?= $p['dorm_room_img_name']; ?>" data-fancybox="photo">
-                                            <img src="uploads/<?= $p['dorm_room_img_name']; ?>" width="100%"/>
-                                </a>
-                                    </span>
+            <span id="image<?= $key; ?>">
+                <a href="uploads/<?= $p['dorm_room_img_name']; ?>" data-fancybox="photo">
+                    <img src="uploads/<?= $p['dorm_room_img_name']; ?>" width="100%" />
+                </a>
+            </span>
         </div>
     </div>
 <?PHP } ?>
@@ -59,11 +59,11 @@ $photo = result_array($sql);
     </tr>
     <?PHP foreach ($cc as $_cc) { ?>
         <?PHP
-        $user = get_text_user_id($_cc['renter_id']);
-        ?>
+            $user = get_text_user_id($_cc['renter_id']);
+            ?>
         <tr>
-            <td class="text-center"><?= $user['code'];?></td>
-            <td><?= $user['name'];?> <?= $user['lastname'];?></td>
+            <td class="text-center"><?= $user['code']; ?></td>
+            <td><?= $user['name']; ?> <?= $user['lastname']; ?></td>
             <td class="text-center"><?= roomer_status($_cc['roomer_status']) ?></td>
         </tr>
     <?PHP } ?>
@@ -82,32 +82,41 @@ $photo = result_array($sql);
 <?PHP } else { ?>
 
     <?PHP
-    $renter_id = check_session('id');
-    $sql = "SELECT * FROM tb_roomer where renter_id = '{$renter_id}' AND roomer_status = 0";
-    $check = row_array($sql);
-    ?>
+        $renter_id = check_session('id');
+        $sql = "SELECT * FROM tb_roomer where renter_id = '{$renter_id}' AND roomer_status = 0";
+        $check = row_array($sql);
+        ?>
 
     <?PHP if ($check) { ?>
-        <?PHP if ($check['dorm_room_id'] == $row['dorm_room_id']) { ?>
+        <?PHP if ($check['dorm_room_id'] == $row['dorm_room_id']) { 
+            $Title = "ยืนยันการออกห้อง";
+            $Text = "ต้องการออกจากห้องนี้หรือไม่ ?";
+            $Color = "#d33";
+            $Link = "process/roomer_cancel_booking.php?roomer_id=" . $check['roomer_id'] ."&id=" . $row['dorm_room_id'];
+            ?>
             <center>
-                <a href="process/roomer_cancel_booking.php?roomer_id=<?= $check['roomer_id']; ?>&id=<?= $row['dorm_room_id']; ?>"
-                   onclick="return confirm('ยืนยันการทำรายการ?')" class="btn btn-danger btn-lg">ออกจากห้องนี้</a>
+                <button onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')" class="btn btn-danger btn-lg">ออกจากห้องนี้</button>
             </center>
-        <?PHP } else { ?>
+        <?PHP } else { 
+            $Title = "ยืนยันการย้ายห้อง";
+            $Text = "ต้องการย้ายมาห้องนี้หรือไม่ ?";
+            $Color = "#f6c23e";
+            $Link = "process/roomer_move_booking.php?roomer_id=" . $check['roomer_id'] ."&id=" . $row['dorm_room_id'] ."&dorm_room_id_old=" . $check['dorm_room_id'];
+            ?>
             <center>
-                <a href="process/roomer_move_booking.php?roomer_id=<?= $check['roomer_id']; ?>&id=<?= $row['dorm_room_id']; ?>&dorm_room_id_old=<?= $check['dorm_room_id']; ?>"
-                   onclick="return confirm('ยืนยันการทำรายการ?')" class="btn btn-warning btn-lg">ย้ายมาห้องนี้</a>
+                <button onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')" class="btn btn-warning btn-lg">ย้ายมาห้องนี้</button>
             </center>
         <?PHP } ?>
 
-    <?PHP } else { ?>
+    <?PHP } else {
+            $Title = "ยืนยันการจองห้อง";
+            $Text = "ต้องการจองห้องนี้หรือไม่ ?";
+            $Color = "#4e73df";
+            $Link = "process/roomer_booking.php?id=" . $row['dorm_room_id'];
+            ?>
         <center>
-            <a href="process/roomer_booking.php?id=<?= $row['dorm_room_id']; ?>"
-               onclick="return confirm('ยืนยันการทำรายการ?')"
-               class="btn btn-primary btn-lg">จองเลย</a>
+            <button onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')" class="btn btn-primary btn-lg">จองเลย</button>
         </center>
     <?PHP } ?>
 
 <?PHP } ?>
-
-

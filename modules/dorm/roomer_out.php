@@ -36,12 +36,17 @@
                   where a.roomer_status = 3 
                   order by b.dorm_id asc , b.dorm_room_name";
               $list = result_array($sql);
-              
-              foreach ($list as $key => $_list) { ?>
+
+              foreach ($list as $key => $_list) {
+                $user = get_text_user_id($_list['renter_id']);
+                $Title = "ยืนยันการออกห้อง";
+                $Text = $_list['dorm_name'] . " ห้อง " . $_list['dorm_room_name'] . " : " . $user['name'] . " " . $user['lastname'] . " ออกห้องแล้ว ?";
+                $Color = "#1cc88a";
+                $Link = "process/update_roomer.php?status=8&id=" . $_list['roomer_id'] . "&dorm_room_id=" . $_list['dorm_room_id'];
+                ?>
                 <tr>
                   <td class="text-center"><?= $key + 1; ?></td>
                   <td class="text-center"><?= $_list['dorm_name']; ?></td>
-                  <?php $user = get_text_user_id($_list['renter_id']); ?>
                   <td class="text-center"><?= $_list['dorm_room_name']; ?></td>
                   <td class="text-center"><?= $user['name'] . " " . $user['lastname']; ?></td>
                   <td class="text-center"><?= date_format(date_create($_list['roomer_date_out']), "d/m/Y") ?></td>
@@ -51,9 +56,9 @@
                     </a>
                   </td>
                   <td class="text-center">
-                    <a href="process/update_roomer.php?status=8&id=<?= $_list['roomer_id']; ?>&dorm_room_id=<?= $_list['dorm_room_id']; ?>" class="btn btn-success" style="width: 100%;" onclick="return confirm('ยืนยันการอนุมัติ?');">
+                    <button class="btn btn-success" style="width: 100%;" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                       <i class="fa fa-check"></i>
-                    </a>
+                    </button>
                   </td>
                 </tr>
               <?PHP } ?>

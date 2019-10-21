@@ -25,16 +25,16 @@
           <div style="border-radius:15px; background: #ffffff; border: 2px solid #f6c23e; padding: 50px 0; text-align: center; font-size: 30px;">
             <?PHP if ($row['setting_value'] == 1) { ?>
               <p style="color: #53c322;">
-                สถานะการจองห้องพักถูกเปิดอยู่
+              <i class="fas fa-toggle-on"></i> สถานะการจองห้องพักถูกเปิดอยู่
               </p>
-              <a href="process/update_setting_dorm.php?status=0" class="btn btn-danger">ปิดเดี๋ยวนี้</a>
+              <a href="process/update_setting_dorm.php?status=0" class="btn btn-primary"><i class="fas fa-toggle-off"></i> ปิดเดี๋ยวนี้</a>
 
             <?PHP } else { ?>
               <p style="color: #ff0000;">
-                สถานะการจองห้องพักถูกปิดอยู่
+              <i class="fas fa-toggle-off"></i> สถานะการจองห้องพักถูกปิดอยู่
               </p>
 
-              <a href="process/update_setting_dorm.php?status=1" class="btn btn-success">เปิดเดี๋ยวนี้</a>
+              <a href="process/update_setting_dorm.php?status=1" class="btn btn-primary"><i class="fas fa-toggle-on"></i> เปิดเดี๋ยวนี้</a>
             <?PHP } ?>
           </div>
 

@@ -43,7 +43,12 @@
                 </tr>
               </thead>
               <tbody>
-                <?PHP foreach ($list as $key => $_list) { ?>
+                <?PHP foreach ($list as $key => $_list) {
+                  $Title = "ยืนยันการลบ";
+                  $Text = "ต้องการลบ " . $_list['student_title'] . $_list['student_name'] . " " . $_list['student_lastname'] . " หรือไม่ ?";
+                  $Color = "#d33";
+                  $Link = "process/delete.php?table=tb_student&ff=student_id&id=" . $_list['student_id'];
+                  ?>
                   <tr>
                     <td class="text-center"><?= $_list['student_code']; ?></td>
                     <td class="text-center">
@@ -60,9 +65,9 @@
                       </a>
                     </td>
                     <td class="text-center">
-                      <a href="process/delete.php?table=tb_student&ff=student_id&id=<?= $_list['student_id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('ยืนยันการลบ?');">
+                      <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                         <i class="fa fa-times"></i>
-                      </a>
+                      </button>
                     </td>
                   </tr>
                 <?PHP } ?>

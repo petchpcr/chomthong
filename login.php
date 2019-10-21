@@ -5,10 +5,80 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ระบบริหารจัดการ</title>
-  <!-- <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" /> -->
+  <script src="assets/plugins/jquery/jquery.js"></script>
   <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <link href="assets/css/style.css" rel="stylesheet" />
   <link href="assets/css/sb-admin-2.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
+  <script src="assets/js/sweetalert2.min.js"></script>
+  
+  <script>
+    function check_login() {
+      var user = $("#username").val();
+      var pass = $("#password").val();
+
+      var data = {
+        'user': user,
+        'pass': pass,
+        'STATUS': 'check_logins'
+      };
+      senddata(JSON.stringify(data));
+    }
+
+    // display
+    function senddata(data) {
+      var form_data = new FormData();
+      form_data.append("DATA", data);
+      var URL = 'process/check_login.php';
+      $.ajax({
+        url: URL,
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(result) {
+          try {
+            var temp = $.parseJSON(result);
+          } catch (e) {
+            console.log('Error#542-decode error');
+          }
+
+          if (temp["status"] == 'success') {
+            swal({
+							title: 'เข้าสู่ระบบสำเร็จ',
+							text: "",
+							type: 'success',
+							showCancelButton: false,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							timer: 1000,
+							confirmButtonText: 'Ok',
+							showConfirmButton: false
+						}).then(function() {
+								window.location.href = 'index.php';
+						}, function(dismiss) {
+								window.location.href = 'index.php';
+						})
+
+          } else if (temp['status'] == "failed") {
+            swal({
+              title: "ไม่สามารถเข้าสู่ระบบได้",
+              text: "โปรดตรวจสอบชื่อผู้ใช้และรหัสผา่น",
+              type: "error",
+              showConfirmButton: false,
+              timer: 1500
+            })
+          } else {
+            console.log(temp['msg']);
+          }
+        }
+      });
+    }
+    // end display
+  </script>
+
 </head>
 
 <body class="bg-gradient-warning">
@@ -28,19 +98,19 @@
                   <h1 class="h4 text-gray-900 m-4">RMUTL login!</h1>
                 </div>
               </div>
-              <form class="user" method="post" action="process/check_login.php">
+              <div class="user">
                 <fieldset>
                   <div class="form-group">
-                    <input type="text" name="username" class="form-control form-control-user" placeholder="ชื่อผู้ใช้" autofocus>
+                    <input type="text" id="username" class="form-control form-control-user" placeholder="ชื่อผู้ใช้" autofocus>
                   </div>
                   <div class="form-group">
-                    <input type="password" name="password" class="form-control form-control-user" placeholder="รหัสผ่าน">
+                    <input type="password" id="password" class="form-control form-control-user" placeholder="รหัสผ่าน">
                   </div>
-                  <button type="submit" class="btn btn-primary btn-user btn-block py-3">
+                  <button onclick="check_login()" class="btn btn-primary btn-user btn-block py-3">
                     เข้าสู่ระบบ
                   </button>
                 </fieldset>
-              </form>
+              </div>
               <hr>
             </div>
 
