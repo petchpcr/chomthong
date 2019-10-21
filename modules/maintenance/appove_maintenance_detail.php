@@ -127,9 +127,19 @@
                 ดาวน์โหลดเอกสาร PDF
               </a>
 
-            <?PHP } ?>
-            <a href="process/update_maintenance.php?status=3&id=<?= $row['maintenance_id']; ?>" class="btn btn-success btn-lg" onclick="return confirm('ยืนยันการอนุมัติ?')">อนุมัติ</a>
-            <a href="process/update_maintenance.php?status=9&id=<?= $row['maintenance_id']; ?>" class="btn btn-danger btn-lg" onclick="return confirm('ยืนยันการแก้ไขไม่ได้?')">แก้ไขไม่ได้</a>
+            <?PHP } 
+            $App_Title = "ยืนยันการอนุมัติ";
+            $App_Text = "อนุมัติการแจ้งซ่อมนี้ใช่หรือไม่ ?";
+            $App_Color = "#1cc88a";
+            $App_Link = "process/update_maintenance.php?status=3&id=" . $row['maintenance_id'];
+
+            $Un_Title = "ยืนยันไม่อนุมัติ";
+            $Un_Text = "ไม่อนุมัติการแจ้งซ่อมนี้ใช่หรือไม่ ?";
+            $Un_Color = "#d33";
+            $Un_Link = "process/update_maintenance.php?status=9&id=" . $row['maintenance_id'];
+            ?>
+            <button class="btn btn-success btn-lg" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">อนุมัติ</button>
+            <button class="btn btn-danger btn-lg" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">แก้ไขไม่ได้</button>
           </center>
 
           <br>

@@ -1,5 +1,20 @@
 <script>
   // ======================================== Main ========================================
+  function AlertConSubmit(Title, Text, Color, Name) {
+    swal({
+      title: Title,
+      text: Text,
+      type: "question",
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonColor: Color,
+      confirmButtonText: 'ตกลง',
+      cancelButtonText: 'ยกเลิก'
+    }).then((result) => {
+      submit(Name);
+    })
+  }
+
   function AlertConLink(Title, Text, Color, Link) {
     swal({
       title: Title,
@@ -32,7 +47,6 @@
       text: Text,
       type: Type,
       showConfirmButton: false,
-      confirmButtonText: 'ตกลง',
       timer: 1500
     })
   }
@@ -68,6 +82,11 @@
     if (End >= Start) {
       window.location.href = "index.php?module=report&action=report_booking_car";
     }
+  }
+
+  function submit(name) {
+    var id = "#smt_"+name;
+    $(id).click();
   }
 
   // ======================================== Equipment ========================================

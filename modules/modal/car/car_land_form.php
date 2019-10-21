@@ -115,10 +115,16 @@ $row = row_array($sql);
       </div>
     </div>
 
-
-    <div class="col-md-12 text-right">
-      <button type="submit" onclick="return confirm('เมื่อกดยืนยันการจองแล้วไม่สามารถแก้ไข หรือยกเลิกการจองได้?')" class="btn btn-primary">ยืนยันการจอง
-      </button>
-    </div>
+    <?PHP
+    $Title = "ยืนยันการจอง";
+    $Text = "เมื่อจองแล้วไม่สามารถแก้ไข หรือยกเลิกการจองได้ ?";
+    $Color = "#d33";
+    $Name = "carlend";
+    ?>
+    <button type="submit" id="smt_carlend" hidden></button>
+    
   </div>
 </form>
+<div class="col-md-12 text-right">
+  <button onclick="AlertConSubmit('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Name; ?>')" class="btn btn-primary">ยืนยันการจอง</button>
+</div>

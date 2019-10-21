@@ -36,7 +36,17 @@
                 </tr>
               </thead>
               <tbody>
-                <?PHP foreach ($list as $key => $_list) { ?>
+                <?PHP foreach ($list as $key => $_list) { 
+                  $App_Title = "ยืนยันการรับของ";
+                  $App_Text = "ผู้จองได้รับครุภัฑณ์แล้วใช่หรือไม่ ?";
+                  $App_Color = "#1cc88a";
+                  $App_Link = "process/update_equipment_lend.php?status=2&id=" . $_list['equipment_lend_id'];
+    
+                  $Un_Title = "ยืนยันการยกเลิก";
+                  $Un_Text = "ยกเลิกการยืมครุภัณฑ์ใช่หรือไม่ ?";
+                  $Un_Color = "#d33";
+                  $Un_Link = "process/update_equipment_lend.php?status=8&id=" . $_list['equipment_lend_id'];
+                  ?>
                   <tr>
                     <td class="text-center">
                       <img src="uploads/<?= $_list['equipment_picture']; ?>" class="img-responsive" alt="">
@@ -49,16 +59,16 @@
                     <td class="text-center"><?= equipment_lend_status($_list['equipment_lend_status']); ?></td>
                     <td class="text-center">
                       <?PHP if ($_list['equipment_lend_status'] == 1) { ?>
-                        <a href="process/update_equipment_lend.php?status=2&id=<?= $_list['equipment_lend_id']; ?>" class="btn btn-sm btn-success" onclick="return confirm('ยืนยันการรับของ?');">
+                        <button class="btn btn-sm btn-success" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">
                           <i class="fa fa-check"></i>
-                        </a>
+                        </button>
                       <?PHP } ?>
                     </td>
                     <td class="text-center">
                       <?PHP if ($_list['equipment_lend_status'] == 1) { ?>
-                        <a href="process/update_equipment_lend.php?status=8&id=<?= $_list['equipment_lend_id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('ยืนยันการยกเลิก?');">
+                        <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">
                           <i class="fa fa-times"></i>
-                        </a>
+                        </button>
                       <?PHP } ?>
                     </td>
                   </tr>

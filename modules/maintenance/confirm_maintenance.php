@@ -67,9 +67,19 @@
                   <a href="index.php?module=maintenance&action=maintenance_detail&id=<?= $_list['maintenance_id']; ?>" style="width: 100%; margin-top: 15px;" class="btn btn-primary">
                     <i class="fa fa-eye"></i> รายละเอียด
                   </a>
-
-                  <a href="process/update_maintenance.php?status=1&id=<?= $_list['maintenance_id']; ?>" class="btn btn-success" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการรับเรื่อง?')">รับเรื่อง</a>
-                  <a href="process/update_maintenance.php?status=8&id=<?= $_list['maintenance_id']; ?>" class="btn btn-danger" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการไม่อนุมัติ?')">ไม่อนุมัติ</a>
+                  <?PHP
+                    $App_Title = "ยืนยันการรับเรื่อง";
+                    $App_Text = "รับเรื่องการแจ้งซ่อมนี้ใช่หรือไม่ ?";
+                    $App_Color = "#1cc88a";
+                    $App_Link = "process/update_maintenance.php?status=1&id=" . $_list['maintenance_id'];
+      
+                    $Un_Title = "ยืนยันไม่รับเรื่อง";
+                    $Un_Text = "ไม่รับเรื่องการแจ้งซ่อมนี้ใช่หรือไม่ ?";
+                    $Un_Color = "#d33";
+                    $Un_Link = "process/update_maintenance.php?status=8&id=" . $_list['maintenance_id'];
+                    ?>
+                  <button class="btn btn-success" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">รับเรื่อง</button>
+                  <button class="btn btn-danger" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">ไม่รับเรื่อง</button>
                 </div>
               </div>
             </div>

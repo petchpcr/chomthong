@@ -65,14 +65,24 @@
                     <i class="fa fa-eye"></i> รายละเอียด
                   </a>
 
-                  <?PHP if ($_list['car_lend_status'] == 1) { ?>
-                    <a href="process/update_car_lend.php?status=2&id=<?= $_list['car_lend_id']; ?>" class="btn btn-sm btn-success" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการรับรถ?');">
+                  <?PHP if ($_list['car_lend_status'] == 1) { 
+                    $App_Title = "ยืนยันการรับรถ";
+                    $App_Text = "ผู้จองได้รับรถไปแล้วใช่หรือไม่ ?";
+                    $App_Color = "#1cc88a";
+                    $App_Link = "process/update_car_lend.php?status=2&id=" . $_list['car_lend_id'];
+      
+                    $Un_Title = "ยืนยันการไม่รับรถ";
+                    $Un_Text = "ผู้จองไม่ต้องการรับรถใช่หรือไม่ ?";
+                    $Un_Color = "#d33";
+                    $Un_Link = "process/update_car_lend.php?status=7&id=" . $_list['car_lend_id'];
+                    ?>
+                    <button class="btn btn-sm btn-success" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">
                       <i class="fa fa-check"></i> รับรถ
-                    </a>
+                    </button>
 
-                    <a href="process/update_car_lend.php?status=7&id=<?= $_list['car_lend_id']; ?>" class="btn btn-sm btn-danger" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการยกเลิก?');">
+                    <button class="btn btn-sm btn-danger" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">
                       <i class="fa fa-times"></i> ไม่รับรถ
-                    </a>
+                    </button>
                   <?PHP } ?>
                 </div>
               </div>

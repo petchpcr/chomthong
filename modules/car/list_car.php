@@ -79,7 +79,12 @@
           $list = result_array($sql);
           ?>
 
-          <?PHP foreach ($list as $key => $_list) { ?>
+          <?PHP foreach ($list as $key => $_list) { 
+            $Title = "ยืนยันการลบ";
+            $Text = "ต้องการลบรถคันนี้หรือไม่ ?";
+            $Color = "#d33";
+            $Link = "process/delete.php?table=tb_car&ff=car_id&id=" . $_list['car_id'];
+            ?>
 
             <div class="list-single">
               <div class="row">
@@ -107,9 +112,9 @@
                     <i class="fa fa-edit"></i> แก้ไข
                   </a>
 
-                  <a href="process/delete.php?table=tb_car&ff=car_id&id=<?= $_list['car_id']; ?>" class="btn btn-sm btn-danger" style="width: 100%; margin-top: 15px" onclick="return confirm('ยืนยันการลบ?');">
+                  <button class="btn btn-sm btn-danger" style="width: 100%; margin-top: 15px" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                     <i class="fa fa-times"></i> ลบ
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

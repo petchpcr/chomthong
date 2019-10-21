@@ -84,9 +84,19 @@
                   <a href="index.php?module=maintenance&action=appove_maintenance_detail&id=<?= $_list['maintenance_id']; ?>" style="width: 100%; margin-top: 15px;" class="btn btn-sm btn-primary">
                     <i class="fa fa-eye"></i> รายละเอียด
                   </a>
+                  <?PHP
+                    $App_Title = "ยืนยันการอนุมัติ";
+                    $App_Text = "อนุมัติการแจ้งซ่อมนี้ใช่หรือไม่ ?";
+                    $App_Color = "#1cc88a";
+                    $App_Link = "process/update_maintenance.php?status=3&id=" . $_list['maintenance_id'];
 
-                  <a href="process/update_maintenance.php?status=3&id=<?= $_list['maintenance_id']; ?>" class="btn btn-success" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการอนุมัติ?')">อนุมัติ</a>
-                  <a href="process/update_maintenance.php?status=9&id=<?= $_list['maintenance_id']; ?>" class="btn btn-danger" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการแก้ไขไม่ได้?')">แก้ไขไม่ได้</a>
+                    $Un_Title = "ยืนยันไม่อนุมัติ";
+                    $Un_Text = "ไม่อนุมัติการแจ้งซ่อมนี้ใช่หรือไม่ ?";
+                    $Un_Color = "#d33";
+                    $Un_Link = "process/update_maintenance.php?status=9&id=" . $_list['maintenance_id'];
+                    ?>
+                  <button class="btn btn-success" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">อนุมัติ</button>
+                  <button class="btn btn-danger" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">แก้ไขไม่ได้</button>
 
                   <?PHP if ($_list['maintenance_pdf'] != "") { ?>
                     <a target="_blank" href="uploads/<?= $_list['maintenance_pdf']; ?>" style="width: 100%; margin-top: 15px;" class="btn btn-primary">

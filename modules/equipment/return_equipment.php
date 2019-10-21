@@ -34,7 +34,12 @@
                 </tr>
               </thead>
               <tbody>
-                <?PHP foreach ($list as $key => $_list) { ?>
+                <?PHP foreach ($list as $key => $_list) { 
+                  $Title = "ยืนยันการคืนของ";
+                  $Text = "ผู้จองคืนครุภัฑณ์เรียบร้อยแล้วใช่หรือไม่ ?";
+                  $Color = "#1cc88a";
+                  $Link = "process/update_equipment_lend.php?status=3&id=" . $_list['equipment_lend_id'];
+                  ?>
                   <tr>
                     <td class="text-center">
                       <img src="uploads/<?= $_list['equipment_picture']; ?>" class="img-responsive" alt="">
@@ -47,9 +52,9 @@
                     <td class="text-center"><?= equipment_lend_status($_list['equipment_lend_status']); ?></td>
                     <td class="text-center">
                       <?PHP if ($_list['equipment_lend_status'] == 2) { ?>
-                        <a href="process/update_equipment_lend.php?status=3&id=<?= $_list['equipment_lend_id']; ?>" class="btn btn-sm btn-success" onclick="return confirm('ยืนยันการคืนของ?');">
+                        <button class="btn btn-sm btn-success" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                           <i class="fa fa-check"></i>
-                        </a>
+                        </button>
                       <?PHP } ?>
                     </td>
                   </tr>

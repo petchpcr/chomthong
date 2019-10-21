@@ -61,14 +61,24 @@
               </div>
               <div class="col-md-3">
 
-                <?PHP if ($_list['equipment_lend_status'] == 0) { ?>
-                  <a href="process/update_equipment_lend.php?status=1&id=<?= $_list['equipment_lend_id']; ?>" class="btn btn-sm btn-success" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการอนุมัติ?');">
+                <?PHP if ($_list['equipment_lend_status'] == 0) { 
+                  $App_Title = "ยืนยันการอนุมัติ";
+                  $App_Text = "อนุมัติการยืมครุภัณฑ์นี้ใช่หรือไม่ ?";
+                  $App_Color = "#1cc88a";
+                  $App_Link = "process/update_equipment_lend.php?status=1&id=" . $_list['equipment_lend_id'];
+    
+                  $Un_Title = "ยืนยันการไม่อนุมัติ";
+                  $Un_Text = "ไม่อนุมัติการยืมครุภัณฑ์นี้ใช่หรือไม่ ?";
+                  $Un_Color = "#d33";
+                  $Un_Link = "process/update_equipment_lend.php?status=8&id=" . $_list['equipment_lend_id'];
+                  ?>
+                  <button class="btn btn-sm btn-success" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $App_Title; ?>', '<?= $App_Text; ?>', '<?= $App_Color; ?>', '<?= $App_Link; ?>')">
                     <i class="fa fa-check"></i> อนุมัติ
-                  </a>
+                  </button>
 
-                  <a href="process/update_equipment_lend.php?status=8&id=<?= $_list['equipment_lend_id']; ?>" class="btn btn-sm btn-danger" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการไม่อนุมัติ?');">
+                  <button class="btn btn-sm btn-danger" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $Un_Title; ?>', '<?= $Un_Text; ?>', '<?= $Un_Color; ?>', '<?= $Un_Link; ?>')">
                     <i class="fa fa-times"></i> ไม่อนุมัติ
-                  </a>
+                  </button>
                 <?PHP } ?>
               </div>
             </div>

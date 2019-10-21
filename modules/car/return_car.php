@@ -65,11 +65,15 @@
                     <i class="fa fa-eye"></i> รายละเอียด
                   </a>
 
-                  <?PHP if ($_list['car_lend_status'] == 2) { ?>
-                    <a href="process/update_car_lend.php?status=3&id=<?= $_list['car_lend_id']; ?>" class="btn btn-sm btn-success" style="width: 100%; margin-top: 15px;" onclick="return confirm('ยืนยันการรับรถ?');">
+                  <?PHP if ($_list['car_lend_status'] == 2) { 
+                    $Title = "ยืนยันการคืนรถ";
+                    $Text = "ผู้จองได้ทำการคืนรถแล้วใช่หรือไม่ ?";
+                    $Color = "#1cc88a";
+                    $Link = "process/update_car_lend.php?status=3&id=" . $_list['car_lend_id'];
+                    ?>
+                    <button class="btn btn-sm btn-success" style="width: 100%; margin-top: 15px;" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                       <i class="fa fa-check"></i> คืนรถ
-                    </a>
-
+                    </button>
                   <?PHP } ?>
                 </div>
               </div>

@@ -41,10 +41,15 @@
                       <a href="index.php?module=maintenance&action=maintenance_detail&id=<?= $_list['maintenance_id']; ?>" class="btn btn-primary btn-sm">รายละเอียด</a>
                     </td>
                     <td class="text-center">
-                      <?PHP if ($_list['maintenance_status'] == 3) { ?>
-                        <a href="process/update_maintenance.php?status=4&id=<?= $_list['maintenance_id']; ?>" class="btn btn-sm btn-success" onclick="return confirm('ยืนยันการแก้ไขปัญหาสำเร็จ?');">
+                      <?PHP if ($_list['maintenance_status'] == 3) {
+                          $Title = "ยืนยันการเสร็จสิ้น";
+                          $Text = "รายการนี้ซ่อมสำเร็จแล้วใช่หรือไม่ ?";
+                          $Color = "#1cc88a";
+                          $Link = "process/update_maintenance.php?status=4&id=" . $_list['maintenance_id'];
+                          ?>
+                        <button class="btn btn-sm btn-success" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                           <i class="fa fa-check"></i>
-                        </a>
+                        </button>
                       <?PHP } ?>
                     </td>
                   </tr>
