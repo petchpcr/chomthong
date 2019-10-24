@@ -31,6 +31,64 @@ function get_floor($conn, $DATA)
   die;
 }
 
+function Evidence_pay($conn, $DATA)
+{
+  $pay_id = $DATA["dorm_pay_id"];
+  $return['dorm_pay_id'] = $pay_id;
+  $Sql = "SELECT evidence_img 
+          FROM tb_dorm_payment 
+          WHERE dorm_payment_id = '$pay_id'";
+
+  $meQuery = mysqli_query($conn, $Sql);
+  $Result = mysqli_fetch_assoc($meQuery);
+  $return['evidence_img'] = $Result['evidence_img'];
+
+
+  if (isset($Result['evidence_img'])) {
+    $return['status'] = "success";
+  } else {
+    $return['status'] = "failed";
+  }
+  $return['form'] = "Evidence_pay";
+  echo json_encode($return);
+  mysqli_close($conn);
+  die;
+}
+
+function Evidence_save($conn, $DATA)
+{
+  $pay_id = $DATA["dorm_pay_id"];
+
+  $Sql = "SELECT evidence_img 
+          FROM tb_dorm_payment 
+          WHERE dorm_payment_id = '$pay_id'";
+
+  $meQuery = mysqli_query($conn, $Sql);
+  $Result = mysqli_fetch_assoc($meQuery);
+  $unfile = "../uploads/" . $Result['evidence_img'];
+  unlink($unfile);
+
+  $LastName = explode('.', $_FILES['file']['name']);
+  $FileName = 'DP_' . date('YmdHis') . '.' . $LastName[1];
+  move_uploaded_file($_FILES['file']['tmp_name'], '../uploads/' . $FileName);
+
+  $Sql = "UPDATE tb_dorm_payment 
+          SET evidence_img = '$FileName' 
+          WHERE dorm_payment_id = '$pay_id'";
+
+  $return['unfile'] = $unfile;
+  $return['FileName'] = $FileName;
+  if (mysqli_query($conn, $Sql)) {
+    $return['status'] = "success";
+  } else {
+    $return['status'] = "failed";
+  }
+  $return['form'] = "Evidence_save";
+  echo json_encode($return);
+  mysqli_close($conn);
+  die;
+}
+
 // ======================================== Car ========================================
 function get_car_by_type($conn, $DATA)
 {
@@ -155,6 +213,10 @@ if (isset($_POST['DATA'])) {
     logout($conn, $DATA);
   } else if ($DATA['STATUS'] == 'get_floor') {
     get_floor($conn, $DATA);
+  } else if ($DATA['STATUS'] == 'Evidence_pay') {
+    Evidence_pay($conn, $DATA);
+  } else if ($DATA['STATUS'] == 'Evidence_save') {
+    Evidence_save($conn, $DATA);
   } else if ($DATA['STATUS'] == 'get_car_by_type') {
     get_car_by_type($conn, $DATA);
   } else if ($DATA['STATUS'] == 'get_qeuip_type') {

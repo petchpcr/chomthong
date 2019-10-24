@@ -28,38 +28,6 @@
 
 <body class="bg-gradient-warning">
 
-    <script>
-        $(document).ready(function() {
-            $("#hrefModal").on("show.bs.modal", function(e) {
-                var link = $(e.relatedTarget);
-                $(this).find(".modal-body").load(link.attr("href"));
-                $("#table-js_wrapper").remove();
-            });
-
-            $('#hrefModal').on('hidden.bs.modal', function() {
-                location.reload();
-            })
-
-            $('#dorm_room_floor').on('change', function() {
-                var floor = this.value;
-                var dorm_id = $(this).data("dorm");
-                window.location.href = "index.php?module=dorm&action=see_dorm_room&dorm_id="+dorm_id+"&floor=" + floor;
-            });
-
-            $('#booking_dorm_room_floor').on('change', function() {
-                var floor = this.value;
-                var dorm_id = $(this).data("dorm");
-                window.location.href = "index.php?module=dorm&action=booking_dorm_room&dorm_id="+dorm_id+"&floor=" + floor;
-            });
-
-            $('#list_dorm_room_floor').on('change', function() {
-                var floor = this.value;
-                var dorm_id = $(this).data("dorm");
-                window.location.href = "index.php?module=dorm&action=list_dorm_room&dorm_id="+dorm_id+"&floor=" + floor;
-            });
-        });
-    </script>
-
     <?PHP include "function/js_function.php"; ?>
 
     <?PHP
@@ -88,7 +56,21 @@
         </div>
     </div>
 
+    <div id="lg_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div id="lg_body" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?PHP include "include/script_js.php"; ?>
 </body>
+<script>
+</script>
 
 </html>

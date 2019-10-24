@@ -68,35 +68,35 @@
 
               <div class="row d-flex justify-content-center">
                 <div class="col-md-12 col-lg-4 text-center text-lg-right my-1">
-                <button type="button" class="btn btn-warning btn-kang">
-                  ยอดค้างชำระเงินของฉัน
-                </button>
+                  <button type="button" class="btn btn-warning btn-kang">
+                    ยอดค้างชำระเงินของฉัน
+                  </button>
                 </div>
                 <div class="col-md-12 col-lg-4 text-center my-1">
-                <button type="button" class="btn btn-success btn-no-kang">
-                  ประวัติการชำระเงินของฉัน
-                </button>
+                  <button type="button" class="btn btn-success btn-no-kang">
+                    ประวัติการชำระเงินของฉัน
+                  </button>
                 </div>
 
                 <?PHP if ($check['roomer_status'] != 2 && $check['roomer_status'] != 3) { ?>
-                <div class="col-md-12 col-lg-4 text-center text-lg-left my-1">
-                  <?PHP 
-                  $room_id = $check['dorm_room_id'];
-                  $sql2 = "SELECT COUNT(dorm_payment_status) AS cnt FROM tb_dorm_payment WHERE dorm_room_id = $room_id AND dorm_payment_status = 0";
-                  $check_not_pay = row_array($sql2);
-                  if ($check_not_pay['cnt'] > 0) { 
-                    $Title = "ไม่สามารถแจ้งออกได้";
-                    $Text = "ต้องชำระค่าหอพักก่อน";
-                    $Type = "warning";
-                  ?>
-                    
-                    <a data-remote="false" class="btn btn-danger text-white" onclick="AlertError('<?= $Title; ?>','<?= $Text; ?>','<?= $Type; ?>')">
-                  <?PHP } else {?>
-                    <a data-remote="false" data-toggle="modal" data-target="#hrefModal" class="btn btn-danger" href="index.php?module=modal&action=dorm/roomer_out_form&roomer_id=<?= $check['roomer_id']; ?>">
-                  <?PHP } ?>
-                    แจ้งออกหอพัก
-                  </a>
-                </div>
+                  <div class="col-md-12 col-lg-4 text-center text-lg-left my-1">
+                    <?PHP
+                          $room_id = $check['dorm_room_id'];
+                          $sql2 = "SELECT COUNT(dorm_payment_status) AS cnt FROM tb_dorm_payment WHERE dorm_room_id = $room_id AND dorm_payment_status = 0";
+                          $check_not_pay = row_array($sql2);
+                          if ($check_not_pay['cnt'] > 0) {
+                            $Title = "ไม่สามารถแจ้งออกได้";
+                            $Text = "ต้องชำระค่าหอพักก่อน";
+                            $Type = "warning";
+                            ?>
+
+                      <a data-remote="false" class="btn btn-danger text-white" onclick="AlertError('<?= $Title; ?>','<?= $Text; ?>','<?= $Type; ?>')">
+                      <?PHP } else { ?>
+                        <a data-remote="false" data-toggle="modal" data-target="#hrefModal" class="btn btn-danger" href="index.php?module=modal&action=dorm/roomer_out_form&roomer_id=<?= $check['roomer_id']; ?>">
+                        <?PHP } ?>
+                        แจ้งออกหอพัก
+                        </a>
+                  </div>
                 <?PHP } ?>
               </div>
 
@@ -122,9 +122,9 @@
                           <a href="modules/print/print_alert_dorm_payment.php?dorm_payment_id=<?= $_list['dorm_payment_id']; ?>" target="_blank" class="btn btn-primary btn-xs">
                             <i class="fa fa-file-text"></i> ใบแจ้งหนี้
                           </a>
-                          <!-- <button class="btn btn-success">
+                          <button onclick="Evidence_pay(<?= $_list['dorm_payment_id']; ?>)" class="btn btn-success">
                             <i class="fas fa-file-image"></i> หลักฐานการชำระเงิน
-                          </button> -->
+                          </button>
                         </th>
                       </tr>
                       <tr>

@@ -1,5 +1,46 @@
 <script>
   // ======================================== Main ========================================
+  $(document).ready(function() {
+    $("#hrefModal").on("show.bs.modal", function(e) {
+      var link = $(e.relatedTarget);
+      $(this).find(".modal-body").load(link.attr("href"));
+      $("#table-js_wrapper").remove();
+    });
+
+    $('#hrefModal').on('hidden.bs.modal', function() {
+      location.reload();
+    })
+
+    $('#dorm_room_floor').on('change', function() {
+      var floor = this.value;
+      var dorm_id = $(this).data("dorm");
+      window.location.href = "index.php?module=dorm&action=see_dorm_room&dorm_id=" + dorm_id + "&floor=" + floor;
+    });
+
+    $('#booking_dorm_room_floor').on('change', function() {
+      var floor = this.value;
+      var dorm_id = $(this).data("dorm");
+      window.location.href = "index.php?module=dorm&action=booking_dorm_room&dorm_id=" + dorm_id + "&floor=" + floor;
+    });
+
+    $('#list_dorm_room_floor').on('change', function() {
+      var floor = this.value;
+      var dorm_id = $(this).data("dorm");
+      window.location.href = "index.php?module=dorm&action=list_dorm_room&dorm_id=" + dorm_id + "&floor=" + floor;
+    });
+
+  });
+
+  function MakeDropify() {
+    
+  }
+
+  function DisableDropify() {
+    $('.dropify').attr("disabled", "disabled");
+    $('.dropify-wrapper').addClass("disabled");
+    $('.dropify-clear').remove();
+  }
+
   function AlertConSubmit(Title, Text, Color, Name) {
     swal({
       title: Title,
@@ -48,7 +89,7 @@
       type: Type,
       showConfirmButton: false,
       timer: 1500
-    })
+    }).catch(function(timeout) {});
   }
 
   // ======================================== Dorm ========================================
@@ -60,6 +101,44 @@
       'STATUS': 'get_floor'
     };
     senddata(JSON.stringify(data));
+  }
+
+  function Evidence_pay(dorm_pay_id) {
+    var data = {
+      'dorm_pay_id': dorm_pay_id,
+      'STATUS': 'Evidence_pay'
+    };
+    senddata(JSON.stringify(data));
+  }
+
+  function Evidence_save(dorm_pay_id) {
+    if ($("#Evd_img").val() != null && $("#Evd_img").val() != "") {
+      var FileData = $("#Evd_img").prop("files")[0];
+      var form_data = new FormData();
+      var Data = JSON.stringify({
+        'dorm_pay_id': dorm_pay_id,
+        'STATUS': 'Evidence_save'
+      });
+      form_data.append("file", FileData);
+      form_data.append("DATA", Data);
+      $.ajax({
+        url: 'process/js_process.php',
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        success: function(result) {
+          $("#btn_save_evd").hide();
+          var Title = "อัพโหลดรูปการชำระเงินเรียบร้อย";
+          var Text = "";
+          var Type = "success";
+          AlertOnly(Title, Text, Type);
+          DisableDropify();
+        }
+      });
+    }
   }
 
   // ======================================== Car ========================================
@@ -85,7 +164,7 @@
   }
 
   function submit(name) {
-    var id = "#smt_"+name;
+    var id = "#smt_" + name;
     $(id).click();
   }
 
@@ -181,6 +260,18 @@
               var Str = "<option value='" + temp['xFloor'][i] + "'>ชั้น " + temp['xFloor'][i] + "</option>";
               $("#xFloor").append(Str);
             }
+          } else if (temp["form"] == 'Evidence_pay') {
+            $("#lg_body").empty();
+            var Str = "<div class='text-center mb-2'>รูปภาพหลักฐานการชำระเงินค่าหอพัก</div>";
+            Str += "<input type='file' id='Evd_img' accept='image/x-png,image/jpeg' class='dropify' />";
+            Str += "<div class='col-12 text-center mt-3'><button id='btn_save_evd' onclick='Evidence_save(" + temp['dorm_pay_id'] + ")' class='btn btn-primary'>บันทึก</button></div>";
+            $("#lg_body").append(Str);
+            $('.dropify').dropify({
+              height: 800,
+              defaultFile: "uploads/"+temp['evidence_img']
+            });
+            $("#lg_modal").modal('show');
+
           } else if (temp["form"] == 'get_car_by_type') {
             $("#slc_car").empty();
             $("#slc_car").append("<option value=''>ทุกคัน</option>");
@@ -231,6 +322,17 @@
             AlertOnly(Title, Text, Type);
             $("#show_user").prop("hidden", true);
             $("#show_sign").prop("hidden", true);
+
+          } else if (temp["form"] == 'Evidence_pay') {
+            $("#lg_body").empty();
+            var Str = "<div class='text-center mb-2'>รูปภาพหลักฐานการชำระเงินค่าหอพัก</div>";
+            Str += "<input type='file' id='Evd_img' accept='image/x-png,image/jpeg' class='dropify' />";
+            Str += "<div class='col-12 text-center mt-3'><button id='btn_save_evd' onclick='Evidence_save(" + temp['dorm_pay_id'] + ")' class='btn btn-primary'>บันทึก</button></div>";
+            $("#lg_body").append(Str);
+            $('.dropify').dropify({
+              height: 800
+            });
+            $("#lg_modal").modal('show');
           }
         } else {
           console.log(temp['msg']);

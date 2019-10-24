@@ -19,6 +19,8 @@ check_login('id','login.php');
 <link href="assets/css/style.css" rel="stylesheet"/>
 <link href="assets/css/main-style.css" rel="stylesheet"/>
 <link href="assets/css/app.css" rel="stylesheet"/>
+<link href="assets/css/dropify.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css?family=Prompt:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
 <!-- <script src="assets/plugins/jquery.js"></script> -->
 <!-- <script src="assets/plugins/bootstrap/bootstrap.min.js"></script> -->
