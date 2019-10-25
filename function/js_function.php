@@ -141,6 +141,23 @@
     }
   }
 
+  function Evidence_view (img) {
+    $("#lg_body").empty();
+    var Str = "<div class='thumbnail' style='width: 50%; height: auto; margin:0 auto;'";
+    Str += "<div class='caption'>";
+    Str += "<span id='img0'>";
+    Str += "<a href='uploads/"+img+"' data-fancybox='photo'>";
+    Str += "<img src='uploads/"+img+"' width='100%' />";
+    Str += "</a>";
+    Str += "</span>";
+    Str += "</div>";
+    Str += "</div>";
+
+
+    $("#lg_body").append(Str);
+    $("#lg_modal").modal('show');
+  }
+
   // ======================================== Car ========================================
   function get_car_by_type() {
     var Type = $("#slc_car_type").val();

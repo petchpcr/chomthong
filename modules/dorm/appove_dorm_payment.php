@@ -176,12 +176,19 @@
                     <td class="text-center"><?= $_list['dorm_name']; ?></td>
                     <td class="text-center"><?= $_list['dorm_room_name']; ?></td>
                     <td class="text-center">
-                      <a data-remote="false" data-toggle="modal" data-target="#hrefModal" class="btn btn-sm btn-info" href="index.php?module=modal&action=dorm/dorm_payment_room_detail&dorm_payment_id=<?= $_list['dorm_payment_id']; ?>">
+                      <a data-remote="false" data-toggle="modal" data-target="#hrefModal" class="btn btn-sm btn-info mb-2" href="index.php?module=modal&action=dorm/dorm_payment_room_detail&dorm_payment_id=<?= $_list['dorm_payment_id']; ?>">
                         รายละเอียด
                       </a>
-                      <button class="btn btn-sm btn-success" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
+                      <button class="btn btn-sm btn-success mb-2" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
                         ชำระเงิน
                       </button>
+                      <?PHP if ($_list['evidence_img'] == null || $_list['evidence_img'] == "") { ?>
+                        
+                      <?PHP } else { ?>
+                        <button onclick="Evidence_view('<?= $_list['evidence_img']?>')" class="btn btn-sm btn-primary">
+                          หลักฐาน
+                        </button>
+                      <?PHP } ?>
                     </td>
                   </tr>
                 <?PHP } ?>
