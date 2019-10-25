@@ -11,8 +11,22 @@
   <link href="assets/css/sb-admin-2.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
   <script src="assets/js/sweetalert2.min.js"></script>
-  
+
   <script>
+    $(document).ready(function() {
+      $("#username").keypress(function(event) {
+        if (event.which == 13) {
+          $("#password").focus();
+        }
+      });
+
+      $("#password").keypress(function(event) {
+        if (event.which == 13) {
+          check_login();
+        }
+      });
+    });
+
     function check_login() {
       var user = $("#username").val();
       var pass = $("#password").val();
@@ -47,20 +61,20 @@
 
           if (temp["status"] == 'success') {
             swal({
-							title: 'เข้าสู่ระบบสำเร็จ',
-							text: "",
-							type: 'success',
-							showCancelButton: false,
-							confirmButtonColor: '#3085d6',
-							cancelButtonColor: '#d33',
-							timer: 1000,
-							confirmButtonText: 'Ok',
-							showConfirmButton: false
-						}).then(function() {
-								window.location.href = 'index.php';
-						}, function(dismiss) {
-								window.location.href = 'index.php';
-						})
+              title: 'เข้าสู่ระบบสำเร็จ',
+              text: "",
+              type: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              timer: 1000,
+              confirmButtonText: 'Ok',
+              showConfirmButton: false
+            }).then(function() {
+              window.location.href = 'index.php';
+            }, function(dismiss) {
+              window.location.href = 'index.php';
+            })
 
           } else if (temp['status'] == "failed") {
             swal({
