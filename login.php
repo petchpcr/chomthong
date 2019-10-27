@@ -11,6 +11,7 @@
   <link href="assets/css/sb-admin-2.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
   <script src="assets/js/sweetalert2.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap&subset=thai" rel="stylesheet">
 
   <script>
     $(document).ready(function() {

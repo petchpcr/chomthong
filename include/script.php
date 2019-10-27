@@ -1,7 +1,7 @@
 <?PHP
 include 'function/db_function.php';
 include 'function/function.php';
-check_login('id','login.php');
+check_login('id', 'login.php');
 ?>
 
 <meta charset="utf-8">
@@ -14,26 +14,25 @@ check_login('id','login.php');
 <!-- <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/> -->
 <link href="assets/css/sb-admin-2.css" rel="stylesheet">
 <link href="assets/css/chomthong.css" rel="stylesheet">
-<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
-<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/style.css" rel="stylesheet"/>
-<link href="assets/css/main-style.css" rel="stylesheet"/>
-<link href="assets/css/app.css" rel="stylesheet"/>
-<link href="assets/css/dropify.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css?family=Prompt:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-
+<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+<link href="assets/css/style.css" rel="stylesheet" />
+<link href="assets/css/main-style.css" rel="stylesheet" />
+<link href="assets/css/app.css" rel="stylesheet" />
+<link href="assets/css/dropify.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Kanit&display=swap&subset=thai" rel="stylesheet">
 <!-- <script src="assets/plugins/jquery.js"></script> -->
 <!-- <script src="assets/plugins/bootstrap/bootstrap.min.js"></script> -->
 
-<link href="assets/plugins/dataTables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/dataTables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
 
 <!-- <script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
 <script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script> -->
 
-<link rel="stylesheet"  href="assets/js/fancybox/fancybox.css"/>
+<link rel="stylesheet" href="assets/js/fancybox/fancybox.css" />
 <script src="assets/js/fancybox/fancybox.js"></script>
 
-<link rel="stylesheet"  href="assets/js/monthly/monthly.css"/>
+<link rel="stylesheet" href="assets/js/monthly/monthly.css" />
 <script src="assets/js/monthly/monthly.js"></script>
 
 <link rel="stylesheet" href="assets/css/sweetalert2.min.css">
@@ -41,20 +40,18 @@ check_login('id','login.php');
 
 
 <style>
-    .form-group , .modal-body{
+    .form-group,
+    .modal-body {
         overflow: hidden;
     }
 </style>
 
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $('#table-js').dataTable();
 
-
-        $('input.numberOnly').keyup(function(e)
-        {
-            if (/\D/g.test(this.value))
-            {
+        $('input.numberOnly').keyup(function(e) {
+            if (/\D/g.test(this.value)) {
                 // Filter non-digits from input value.
                 this.value = this.value.replace(/\D/g, '');
             }
