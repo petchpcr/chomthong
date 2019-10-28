@@ -28,6 +28,7 @@ function check_logins($DATA)
 
     if ($row > 0) {
         $id = "A-" . $row['admin_id'];
+        $titleName = "";
         $name = $row['admin_name'];
         $picture = $row['admin_picture'];
         $position = $row['position_id'];
@@ -41,6 +42,7 @@ function check_logins($DATA)
         if ($row) {
             $id = "M-" . $row['manager_id'];
             $idcard = $row['manager_idcard'];
+            $titleName = $row['manager_title'];
             $name = $row['manager_name'] . " " . $row['manager_lastname'];
             $picture = $row['manager_picture'];
             $position = $row['position_id'];
@@ -53,6 +55,7 @@ function check_logins($DATA)
 
             if ($row) {
                 $id = "T-" . $row['teacher_id'];
+                $titleName = $row['teacher_title'];
                 $name = $row['teacher_name'] . " " . $row['teacher_lastname'];
                 $picture = $row['teacher_picture'];
                 $position = $row['position_id'];
@@ -66,6 +69,7 @@ function check_logins($DATA)
                 if ($row) {
                     $id = "P-" . $row['personnel_id'];
                     $idcard = $row['personnel_idcard'];
+                    $titleName = $row['personnel_title'];
                     $name = $row['personnel_name'] . " " . $row['personnel_lastname'];
                     $picture = $row['personnel_picture'];
                     $position = $row['position_id'];
@@ -78,6 +82,7 @@ function check_logins($DATA)
 
                     if ($row) {
                         $id = "S-" . $row['student_id'];
+                        $titleName = $row['student_title'];
                         $name = $row['student_name'] . " " . $row['student_lastname'];
                         $picture = $row['student_picture'];
                         $status = 0;
@@ -96,6 +101,7 @@ function check_logins($DATA)
         $return['status'] = "success";
         $_SESSION['id'] = $id;
         $_SESSION['idcard'] = $idcard;
+        $_SESSION['title'] = $titleName;
         $_SESSION['name'] = $name;
         $_SESSION['picture'] = $picture;
         $_SESSION['status'] = $status;

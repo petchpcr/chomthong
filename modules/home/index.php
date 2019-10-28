@@ -14,7 +14,7 @@
 
       <div class="col text-center" style="display: block">
         <div>
-          <a href="https://bala.rmutl.ac.th/jomthong/" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
+          <a href="https://bala.rmutl.ac.th/jomthong/" target="_blank" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
             <i class="fa fa-list"></i>
           </a>
         </div>
@@ -327,16 +327,19 @@
       <?PHP } ?>
 
       <!-- นักศึกษา -->
-    <?php } elseif ($_SESSION['status'] == 0) { ?>
+      <?php } elseif ($_SESSION['status'] == 0) {
+        if ($_SESSION['title'] == "นางสาว") { ?>
 
-      <div class="col text-center" style="display: block">
-        <div>
-          <a href="index.php?module=dorm&action=my_dorm" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
-            <i class="fa fa-home"></i>
-          </a>
+        <div class="col text-center" style="display: block">
+          <div>
+            <a href="index.php?module=dorm&action=my_dorm" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
+              <i class="fa fa-home"></i>
+            </a>
+          </div>
+          <div class="mb-4 text-white">จัดการหอพัก</div>
         </div>
-        <div class="mb-4 text-white">จัดการหอพัก</div>
-      </div>
+
+      <?php } ?>
 
       <div class="col text-center" style="display: block">
         <div>

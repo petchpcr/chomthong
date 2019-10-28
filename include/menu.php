@@ -11,7 +11,7 @@
   <?php if ($_SESSION['status'] == 4) { ?>
 
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="https://bala.rmutl.ac.th/jomthong/" target="_blank">
         <i class="fa fa-list fa-fw"></i>
         <span>จัดการหน้าเว็บไซต์</span>
       </a>
@@ -53,7 +53,7 @@
     </li>
 
     <!-- ผู้บริหาร -->
-  <?php } elseif ($_SESSION['status'] == 3) { ?>
+  <?php } else if ($_SESSION['status'] == 3) { ?>
 
     <li class="nav-item <?= $_GET['action'] == 'appove_maintenance' || $_GET['action'] == 'appove_maintenance_detail' ? 'active' : ''; ?>">
       <a class="nav-link" href="index.php?module=maintenance&action=appove_maintenance">
@@ -74,7 +74,7 @@
     </li>
 
     <!-- อาจารย์ -->
-  <?php } elseif ($_SESSION['status'] == 2) { ?>
+  <?php } else if ($_SESSION['status'] == 2) { ?>
 
     <li class="nav-item <?= $_GET['module'] == 'dorm' ? 'active' : ''; ?>">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dorm_menu" aria-expanded="true" aria-controls="dorm_menu">
@@ -131,7 +131,7 @@
     </li>
 
     <!-- บุคลากร -->
-  <?php } elseif ($_SESSION['status'] == 1) { ?>
+  <?php } else if ($_SESSION['status'] == 1) { ?>
 
     <!-- บุคลากรฝ่ายยุทธศาสตร์และแผน -->
     <?PHP if ($_SESSION['position'] == 1) { ?>
@@ -209,7 +209,7 @@
       </li>
 
       <!-- บุคลากรฝ่ายอาคารสถานที่ -->
-    <?PHP } elseif ($_SESSION['position'] == 2) { ?>
+    <?PHP } else if ($_SESSION['position'] == 2) { ?>
 
       <li class="nav-item <?= $_GET['module'] == 'dorm' ? 'active' : ''; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dorm_menu" aria-expanded="true" aria-controls="dorm_menu">
@@ -297,7 +297,7 @@
       </li>
 
       <!-- บุคลากรทั่วไป -->
-    <?PHP } elseif ($_SESSION['position'] == 3) { ?>
+    <?PHP } else if ($_SESSION['position'] == 3) { ?>
 
       <li class="nav-item <?= $_GET['module'] == 'dorm' ? 'active' : ''; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dorm_menu" aria-expanded="true" aria-controls="dorm_menu">
@@ -356,21 +356,23 @@
     <?PHP } ?>
 
     <!-- นักศึกษา -->
-  <?php } elseif ($_SESSION['status'] == 0) { ?>
-
-    <li class="nav-item <?= $_GET['module'] == 'dorm' ? 'active' : ''; ?>">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dorm_menu" aria-expanded="true" aria-controls="dorm_menu">
-        <i class="fas fa-home"></i>
-        <span>จัดการหอพัก</span>
-      </a>
-      <div id="dorm_menu" class="collapse <?= $_GET['module'] == 'dorm' ? 'show' : ''; ?>" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item <?= $_GET['action'] == 'see_dorm' || $_GET['action'] == 'see_dorm_room' ? 'active' : ''; ?>" href="index.php?module=dorm&action=see_dorm">ข้อมูลห้องพักทั้งหมด</a>
-          <a class="collapse-item <?= $_GET['action'] == 'my_dorm' ? 'active' : ''; ?>" href="index.php?module=dorm&action=my_dorm">ห้องพักของฉัน</a>
-          <a class="collapse-item <?= $_GET['action'] == 'booking'  || $_GET['action'] == 'booking_dorm_room' ? 'active' : ''; ?>" href="index.php?module=dorm&action=booking">จองห้องพัก</a>
+    <?php } else if ($_SESSION['status'] == 0) {
+      if ($_SESSION['title'] == 'นางสาว') {
+        ?>
+      <li class="nav-item <?= $_GET['module'] == 'dorm' ? 'active' : ''; ?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dorm_menu" aria-expanded="true" aria-controls="dorm_menu">
+          <i class="fas fa-home"></i>
+          <span>จัดการหอพัก</span>
+        </a>
+        <div id="dorm_menu" class="collapse <?= $_GET['module'] == 'dorm' ? 'show' : ''; ?>" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item <?= $_GET['action'] == 'see_dorm' || $_GET['action'] == 'see_dorm_room' ? 'active' : ''; ?>" href="index.php?module=dorm&action=see_dorm">ข้อมูลห้องพักทั้งหมด</a>
+            <a class="collapse-item <?= $_GET['action'] == 'my_dorm' ? 'active' : ''; ?>" href="index.php?module=dorm&action=my_dorm">ห้องพักของฉัน</a>
+            <a class="collapse-item <?= $_GET['action'] == 'booking'  || $_GET['action'] == 'booking_dorm_room' ? 'active' : ''; ?>" href="index.php?module=dorm&action=booking">จองห้องพัก</a>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
+    <?php } ?>
 
     <li class="nav-item <?= $_GET['module'] == 'maintenance' ? 'active' : ''; ?>">
       <a class="nav-link" href="index.php?module=maintenance&action=list_maintenance">

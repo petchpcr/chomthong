@@ -1,3 +1,8 @@
+<?PHP
+if ($_SESSION['status'] == 0 && $_SESSION['title'] != 'นางสาว') {
+  echo "<script>window.location.href='index.php';</script>";
+}
+?>
 <div id="wrapper">
   <?PHP include "include/menu.php"; ?>
 

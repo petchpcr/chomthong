@@ -31,10 +31,6 @@
 
   });
 
-  function MakeDropify() {
-    
-  }
-
   function DisableDropify() {
     $('.dropify').attr("disabled", "disabled");
     $('.dropify-wrapper').addClass("disabled");
