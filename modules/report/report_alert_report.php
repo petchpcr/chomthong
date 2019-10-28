@@ -67,9 +67,9 @@
                 <thead>
                   <tr>
                     <th width="50" class="text-center">ลำดับ</th>
-                    <th class="text-center">หัวข้อ</th>
+                    <th width="250" class="text-center">หัวข้อ</th>
                     <th class="text-center">รายละเอียด</th>
-                    <th class="text-center">วันที่</th>
+                    <th width="200" class="text-center">วันที่</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -153,9 +153,9 @@ $list = result_array($sql);
         <thead>
         <tr>
             <th width="50" class="text-center">ลำดับ</th>
-            <th class="text-center">หัวข้อ</th>
+            <th width="200" class="text-center">หัวข้อ</th>
             <th class="text-center">รายละเอียด</th>
-            <th class="text-center">วันที่</th>
+            <th width="100" class="text-center">วันที่</th>
         </tr>
         </thead>
         <tbody>
