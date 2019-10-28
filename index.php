@@ -31,6 +31,9 @@
     <?PHP include "function/js_function.php"; ?>
 
     <?PHP
+    if (!($_SESSION['status'] >= 0)) {
+        echo "<script>window.location.href='login.php';</script>";
+    }
     if (empty($_GET['module'])) {
         $module = "home";
         $action = "index";
