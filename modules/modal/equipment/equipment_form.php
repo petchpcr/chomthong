@@ -51,19 +51,19 @@ if (isset($_GET['id'])) {
     </div>
 
 
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="form-group">
             <label>รหัสครุภัณฑ์ :</label>
             <input type="text" class="form-control" name="code" value="<?= $code; ?>" required>
         </div>
     </div>
 
-    <div class="col-md-6">
+    <!-- <div class="col-md-6">
         <div class="form-group">
             <label>ประเภทครุภัณฑ์ :</label>
             <input type="text" class="form-control" name="category" value="<?= $category; ?>" required>
         </div>
-    </div>
+    </div> -->
     <div class="col-md-12">
         <div class="form-group">
             <label>ชื่อครุภัณฑ์ :</label>
