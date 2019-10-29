@@ -22,7 +22,9 @@
           </div>
 
           <?PHP
-          $sql = "SELECT * FROM tb_manager where delete_data = 0";
+          $sql = "SELECT * FROM tb_manager 
+                  where delete_data = 0
+                  ORDER BY manager_id ASC";
           $list = result_array($sql);
           ?>
           <div class="table-responsive">
@@ -61,9 +63,11 @@
                       </a>
                     </td>
                     <td class="text-center">
-                      <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
-                        <i class="fa fa-times"></i>
-                      </button>
+                      <?php if ($_list['manager_id'] != 1) {?>
+                        <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
+                          <i class="fa fa-times"></i>
+                        </button>
+                      <?PHP } ?>
                     </td>
                   </tr>
                 <?PHP } ?>

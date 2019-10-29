@@ -19,6 +19,7 @@ if (empty($id)) {
 
             $data = array(
                 "dorm_position" => $position,
+                "dorm_gender" => $gender,
                 "dorm_name" => $name,
                 "dorm_price" => $price,
                 "dorm_picture" => $picture_name,
@@ -47,6 +48,7 @@ if (empty($id)) {
         if (in_array($file_ext, $extension)) {
             $data = array(
                 "dorm_position" => $position,
+                "dorm_gender" => $gender,
                 "dorm_name" => $name,
                 "dorm_price" => $price,
                 "dorm_picture" => $picture_name,
@@ -66,6 +68,7 @@ if (empty($id)) {
 
         $data = array(
             "dorm_position" => $position,
+            "dorm_gender" => $gender,
             "dorm_name" => $name,
             "dorm_price" => $price,
             "dorm_detail" => $detail,
@@ -77,5 +80,3 @@ if (empty($id)) {
         echo "<meta charset='utf-8'/><script>location.href='../index.php?module=dorm&action=list_dorm';</script>";
     }
 }
-?>
-

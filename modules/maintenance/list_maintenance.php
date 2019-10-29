@@ -30,6 +30,7 @@
             <table class="table table-bordered table-hover" id="table-js">
               <thead>
                 <tr>
+                  <th width="50" class="text-center">ลำดับ</th>
                   <th class="text-center">รายการ</th>
                   <th class="text-center">ผู้แจ้ง</th>
                   <th class="text-center">สถานะ</th>
@@ -39,6 +40,7 @@
               <tbody>
                 <?PHP foreach ($list as $key => $_list) { ?>
                   <tr>
+                    <td class="text-center"><?= $key+1; ?></td>
                     <td class="text-center"><?= $_list['maintenance_list']; ?></td>
                     <td class="text-center">
                       <?PHP

@@ -62,15 +62,15 @@
           <h4 class="text-center">รายละเอียดการแจ้ง</h4>
           <p>
             <b>ประเภท :</b>
-            : <?= $row['maintenance_type_name']; ?>
+            <?= $row['maintenance_type_name']; ?>
           </p>
           <p>
             <b>รายการ :</b>
-            : <?= $row['maintenance_list']; ?>
+            <?= $row['maintenance_list']; ?>
           </p>
           <p>
             <b>รายละเอียด :</b>
-            : <?= $row['maintenance_detail']; ?>
+            <?= $row['maintenance_detail']; ?>
           </p>
           <p>
             <b>สถานที่ :</b>
@@ -98,7 +98,7 @@
 
             <p>
               <b>งบประมาน :</b>
-              : <?= $row['maintenance_price']; ?> บาท
+              <?= $row['maintenance_price']; ?> บาท
             </p>
 
             <p>

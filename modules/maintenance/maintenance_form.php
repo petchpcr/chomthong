@@ -1,3 +1,12 @@
+<?PHP
+if ($_SESSION['status'] == 0) {
+  if ($_SESSION['id'] != 'S-1') {
+    echo "<script>window.location.href='index.php';</script>";
+  } else {
+    $remark = " (กรุณาระบุชื่อผู้แจ้ง)";
+  }
+}
+?>
 <div id="wrapper">
   <?PHP include "include/menu.php"; ?>
 
@@ -62,7 +71,7 @@
 
             <div class="col-md-12">
               <div class="form-group">
-                <label>หมายเหตุ :</label>
+                <label>หมายเหตุ :<?= $remark; ?></label>
                 <textarea name="maintenance_msg" class="form-control" required></textarea>
               </div>
             </div>

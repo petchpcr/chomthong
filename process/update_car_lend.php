@@ -5,7 +5,7 @@ include '../function/function.php';
 
 
 extract($_GET);
-$user_idcard = $_SESSION['idcard'];
+$user_idcard = 1;
 
 $data = array(
     "car_lend_status" => $status,

@@ -137,7 +137,10 @@ include '../../function/function.php';
 
     <?PHP
     extract($_GET);
-    $sql = "SELECT * FROM tb_car_lend a inner join tb_car b on a.car_id = b.car_id inner join tb_driver d on a.driver_id = d.driver_id where car_lend_id = '{$car_lend_id}'";
+    $sql = "SELECT * FROM tb_car_lend a 
+            inner join tb_car b on a.car_id = b.car_id 
+            inner join tb_driver d on a.driver_id = d.driver_id 
+            where car_lend_id = '{$car_lend_id}'";
     $row = row_array($sql);
 
     $user = get_text_user_id($row['reservations_id']);
@@ -215,14 +218,12 @@ include '../../function/function.php';
 
             <?PHP
             $user_approve = $row['user_approve'];
-            $Sql = "SELECT personnel_name AS sign_name,
-                        personnel_lastname AS sign_Lname,
-                        personnel_title AS sign_title,
-                        position_type,
-                        signature 
-                FROM tb_personnel 
-                INNER JOIN tb_position ON tb_position.position_id = tb_personnel.position_id 
-                WHERE personnel_idcard = '$user_approve'";
+            $Sql = "SELECT manager_name AS sign_name,
+                            manager_lastname AS sign_Lname,
+                            manager_title AS sign_title,
+                            signature 
+                    FROM tb_manager 
+                    WHERE manager_id = '$user_approve'";
             $sign = row_array($Sql);
             ?>
 
@@ -239,8 +240,8 @@ include '../../function/function.php';
                 </div>
                 <center>
                     <div style="margin:10px 0;">(<?= $sign['sign_title'] . $sign['sign_name'] . " " . $sign['sign_Lname']; ?>)</div>
-                    <div style="margin-bottom:10px;">ตำแหน่ง<?= $sign['position_type']; ?></div>
-                    <div>ผู้มีอำนาจอนุญาติให้ใช้รถ</div>
+                    <div style="margin-bottom:10px;">ตำแหน่งผู้บริหาร</div>
+                    <div>ผู้มีอำนาจอนุญาตให้ใช้รถ</div>
                 </center>
             </div>
         </div>

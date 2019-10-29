@@ -58,7 +58,7 @@
       </div>
 
       <!-- ผู้บริหาร -->
-    <?php } elseif ($_SESSION['status'] == 3) { ?>
+    <?php } else if ($_SESSION['status'] == 3) { ?>
 
       <div class="col text-center" style="display: block">
         <div>
@@ -108,7 +108,7 @@
       </div>
 
       <!-- อาจารย์ -->
-    <?php } elseif ($_SESSION['status'] == 2) { ?>
+    <?php } else if ($_SESSION['status'] == 2) { ?>
 
       <div class="col text-center" style="display: block">
         <div>
@@ -147,7 +147,7 @@
       </div>
 
       <!-- บุคลากร -->
-    <?php } elseif ($_SESSION['status'] == 1) { ?>
+    <?php } else if ($_SESSION['status'] == 1) { ?>
 
       <!-- บุคลากรฝ่ายยุทธศาสตร์และแผน -->
       <?PHP if ($_SESSION['position'] == 1) { ?>
@@ -213,7 +213,7 @@
         </div>
 
         <!-- บุคลากรฝ่ายอาคารสถานที่ -->
-      <?PHP } elseif ($_SESSION['position'] == 2) { ?>
+      <?PHP } else if ($_SESSION['position'] == 2) { ?>
 
         <div class="col text-center" style="display: block">
           <a href="index.php?module=dorm&action=my_dorm" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
@@ -286,7 +286,7 @@
         </div>
 
         <!-- บุคลากรทั่วไป -->
-      <?PHP } elseif ($_SESSION['position'] == 3) { ?>
+      <?PHP } else if ($_SESSION['position'] == 3) { ?>
 
         <div class="col text-center" style="display: block">
           <div>
@@ -327,8 +327,19 @@
       <?PHP } ?>
 
       <!-- นักศึกษา -->
-      <?php } elseif ($_SESSION['status'] == 0) {
-        if ($_SESSION['title'] == "นางสาว") { ?>
+      <?php } else if ($_SESSION['status'] == 0) {
+        if ($_SESSION['id'] == "S-1") { ?>
+
+        <div class="col text-center" style="display: block">
+          <div>
+            <a href="index.php?module=maintenance&action=list_maintenance" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
+              <i class="fa fa-wrench"></i>
+            </a>
+          </div>
+          <div class="mb-4 text-white">นักศึกษาแจ้งซ่อม</div>
+        </div>
+
+      <?php } else { ?>
 
         <div class="col text-center" style="display: block">
           <div>
@@ -339,38 +350,28 @@
           <div class="mb-4 text-white">จัดการหอพัก</div>
         </div>
 
+        <div class="col text-center" style="display: block">
+          <div>
+            <a href="index.php?module=equipment&action=list_equipment_lend" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
+              <i class="fas fa-archive"></i>
+            </a>
+          </div>
+          <div class="mb-4 text-white">ยืมครุภัณฑ์</div>
+        </div>
+
+        <div class="col text-center" style="display: block">
+          <div>
+            <a href="index.php?module=alert_report&action=my_alert_report" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
+              <i class="fa fa-file-text"></i>
+            </a>
+          </div>
+          <div class="mb-4 text-white">คำร้องเรียน</div>
+        </div>
+
+      <?php }
+      } else { ?>
+        <h2 class="text-center" style="padding-top: 100px;">คุณไม่มีสิทธิ์ใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ</h2>
       <?php } ?>
-
-      <div class="col text-center" style="display: block">
-        <div>
-          <a href="index.php?module=maintenance&action=list_maintenance" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
-            <i class="fa fa-wrench"></i>
-          </a>
-        </div>
-        <div class="mb-4 text-white">แจ้งซ่อม</div>
-      </div>
-
-      <div class="col text-center" style="display: block">
-        <div>
-          <a href="index.php?module=equipment&action=list_equipment_lend" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
-            <i class="fas fa-archive"></i>
-          </a>
-        </div>
-        <div class="mb-4 text-white">ยืมครุภัณฑ์</div>
-      </div>
-
-      <div class="col text-center" style="display: block">
-        <div>
-          <a href="index.php?module=alert_report&action=my_alert_report" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
-            <i class="fa fa-file-text"></i>
-          </a>
-        </div>
-        <div class="mb-4 text-white">คำร้องเรียน</div>
-      </div>
-
-    <?php } else { ?>
-      <h2 class="text-center" style="padding-top: 100px;">คุณไม่มีสิทธิ์ใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ</h2>
-    <?php } ?>
 
   </div>
 </div>

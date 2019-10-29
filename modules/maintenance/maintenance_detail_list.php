@@ -38,6 +38,7 @@
             <table class="table table-bordered table-hover" id="table-js">
               <thead>
                 <tr>
+                  <th width="50" class="text-center">ลำดับ</th>
                   <th class="text-center">รายการ</th>
                   <th class="text-center">ผู้แจ้ง</th>
                   <th class="text-center">สถานะ</th>
@@ -47,6 +48,7 @@
               <tbody>
                 <?PHP foreach ($list as $key => $_list) { ?>
                   <tr>
+                    <td class="text-center"><?= $key+1; ?></td>
                     <td class="text-center"><?= $_list['maintenance_list']; ?></td>
                     <td class="text-center">
                       <?PHP
@@ -107,15 +109,15 @@
           <h4 class="text-center">รายละเอียดการแจ้ง</h4>
           <p>
             <b>ประเภท :</b>
-            : <?= $row['maintenance_type_name']; ?>
+            <?= $row['maintenance_type_name']; ?>
           </p>
           <p>
             <b>รายการ :</b>
-            : <?= $row['maintenance_list']; ?>
+            <?= $row['maintenance_list']; ?>
           </p>
           <p>
             <b>รายละเอียด :</b>
-            : <?= $row['maintenance_detail']; ?>
+            <?= $row['maintenance_detail']; ?>
           </p>
           <p>
             <b>สถานที่ :</b>
@@ -143,7 +145,7 @@
 
             <p>
               <b>งบประมาน :</b>
-              : <?= $row['maintenance_price']; ?> บาท
+              <?= $row['maintenance_price']; ?> บาท
             </p>
 
             <p>

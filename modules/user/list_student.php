@@ -24,7 +24,10 @@
 
 
           <?PHP
-          $sql = "SELECT * FROM tb_student a LEFT JOIN tb_major b on a.major_id = b.major_id where a.delete_data = 0";
+          $sql = "SELECT * FROM tb_student a 
+                  LEFT JOIN tb_major b on a.major_id = b.major_id 
+                  where a.delete_data = 0
+                  ORDER BY a.student_id ASC";
           $list = result_array($sql);
           ?>
           <div class="table-responsive">
@@ -65,9 +68,11 @@
                       </a>
                     </td>
                     <td class="text-center">
-                      <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
-                        <i class="fa fa-times"></i>
-                      </button>
+                      <?php if ($_list['student_id'] != 1) { ?>
+                        <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
+                          <i class="fa fa-times"></i>
+                        </button>
+                      <?PHP } ?>
                     </td>
                   </tr>
                 <?PHP } ?>

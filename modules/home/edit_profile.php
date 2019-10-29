@@ -66,6 +66,9 @@
         $address = $row['personnel_address'];
         $picture = $row['personnel_picture'];
       } else if ($status == 0) {
+        if ($_SESSION['id'] == "S-1") {
+          echo "<script>window.location.href='index.php'</script>";
+        }
         $sql = "SELECT * FROM tb_student WHERE student_id = {$id}";
         $row = row_array($sql);
 
@@ -131,7 +134,7 @@
           <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="form-group">
               <label>เลขบัตรประชาชน :</label>
-              <input type="text" class="form-control" name="idcard" maxlength="13" value="<?= $idcard; ?>" readonly>
+              <input type="text" class="form-control" name="idcard" maxlength="13" value="<?= $idcard; ?>">
             </div>
           </div>
 

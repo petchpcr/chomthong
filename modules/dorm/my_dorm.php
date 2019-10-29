@@ -1,6 +1,14 @@
 <?PHP
-if ($_SESSION['status'] == 0 && $_SESSION['title'] != 'นางสาว') {
-  echo "<script>window.location.href='index.php';</script>";
+if ($_SESSION['id'] == 'S-1') {
+  echo "<script>window.location.href='index.php'</script>";
+}
+$position = $_SESSION['status'];
+
+if ($_SESSION['title'] == 'นาย') {
+  $gender = 1;
+}
+else if ($_SESSION['title'] == 'นาง' || $_SESSION['title'] == 'นางสาว') {
+  $gender = 2;
 }
 ?>
 <div id="wrapper">

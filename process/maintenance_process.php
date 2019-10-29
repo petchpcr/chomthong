@@ -8,7 +8,6 @@ extract($_POST);
 
 $extension = array("jpeg", "jpg", "png", "gif" , "JPG" , "PNG");
 
-
 $data = array(
     "maintenance_list" => $maintenance_list,
     "maintenance_detail" => $maintenance_detail,
@@ -46,7 +45,6 @@ foreach ($_FILES["img"]["tmp_name"] as $key => $tmp_name) {
 
     }
 }
-
 
 echo "<meta charset='utf-8'/><script>location.href='../index.php?module=maintenance&action=list_maintenance';</script>";
 ?>

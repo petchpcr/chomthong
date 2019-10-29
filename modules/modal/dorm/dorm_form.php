@@ -18,6 +18,7 @@ if (isset($_GET['id'])) {
     $price = $row['dorm_price'];
     $picture = $row['dorm_picture'];
     $position = $row['dorm_position'];
+    $gender = $row['dorm_gender'];
 }
 
 ?>
@@ -41,6 +42,17 @@ if (isset($_GET['id'])) {
                 <option disabled selected value="">เลือกสิทธิการเข้าพัก</option>
                 <option <?= $position == "1" ? "selected" : ""; ?> value="1"><?= dorm_position(1); ?></option>
                 <option <?= $position == "0" ? "selected" : ""; ?> value="0"><?= dorm_position(0); ?></option>
+            </select>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="form-group">
+            <label>ประเภท :</label>
+            <select name="gender" class="form-control" required>
+                <option <?= $gender == "0" ? "selected" : ""; ?> value="0"><?= dorm_gender(0); ?></option>
+                <option <?= $gender == "1" ? "selected" : ""; ?> value="1"><?= dorm_gender(1); ?></option>
+                <option <?= $gender == "2" ? "selected" : ""; ?> value="2"><?= dorm_gender(2); ?></option>
             </select>
         </div>
     </div>

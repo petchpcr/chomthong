@@ -247,6 +247,21 @@ function dorm_position($num)
     return $status;
 }
 
+function dorm_gender($num)
+{
+    $status = "";
+
+    if ($num == 0) {
+        $status = "หอพักรวม";
+    } else if ($num == 1) {
+        $status = "หอพักชาย";
+    } else if ($num == 2) {
+        $status = "หอพักหญิง";
+    }
+
+    return $status;
+}
+
 function get_text_user_id($id)
 {
     $data = array();

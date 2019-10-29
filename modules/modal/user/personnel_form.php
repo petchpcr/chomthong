@@ -1,6 +1,6 @@
 <?PHP
 $id = "";
-$title = "นาย";
+$title = "";
 $name = "";
 $lastname = "";
 $user = "";
@@ -49,20 +49,12 @@ if (isset($_GET['id'])) {
   <div class="col-md-12">
     <div class="form-group">
       <label>คำนำหน้าชื่อ :</label>
-      <label>
-        <input type="radio" name="title" <?= $title == "นาย" ? "checked" : ""; ?> value="นาย">
-        นาย
-      </label>
-
-      <label>
-        <input type="radio" name="title" <?= $title == "นาง" ? "checked" : ""; ?> value="นาง">
-        นาง
-      </label>
-
-      <label>
-        <input type="radio" name="title" <?= $title == "นางสาว" ? "checked" : ""; ?> value="นางสาว">
-        นางสาว
-      </label>
+      <select name="title" id="" class="form-control">
+        <option value="">ระบุคำนำหน้า</option>
+        <option value="นาย" <?= $title == "นาย" ? "selected" : ""; ?>>นาย</option>
+        <option value="นาง" <?= $title == "นาง" ? "selected" : ""; ?>>นาง</option>
+        <option value="นางสาว" <?= $title == "นางสาว" ? "selected" : ""; ?>>นางสาว</option>
+      </select>
     </div>
   </div>
 
@@ -96,7 +88,7 @@ if (isset($_GET['id'])) {
   <div class="col-md-6">
     <div class="form-group">
       <label>เลขบัตรประชาชน :</label>
-      <input type="text" class="form-control numberOnly" name="idcard" minlength="13" maxlength="13" value="<?= $idcard; ?>" required>
+      <input type="text" class="form-control numberOnly" name="idcard" minlength="13" maxlength="13" value="<?= $idcard; ?>">
     </div>
   </div>
 
@@ -119,21 +111,21 @@ if (isset($_GET['id'])) {
   <div class="col-md-6">
     <div class="form-group">
       <label>E-mail :</label>
-      <input type="emsil" class="form-control" name="email" value="<?= $email; ?>" required>
+      <input type="emsil" class="form-control" name="email" value="<?= $email; ?>">
     </div>
   </div>
 
   <div class="col-md-6">
     <div class="form-group">
       <label>เบอร์โทร :</label>
-      <input type="text" class="form-control numberOnly" name="telephone" maxlength="10" value="<?= $telephone; ?>" required>
+      <input type="text" class="form-control numberOnly" name="telephone" maxlength="10" value="<?= $telephone; ?>">
     </div>
   </div>
 
   <div class="col-md-12">
     <div class="form-group">
       <label>ที่อยู่ :</label>
-      <textarea name="address" class="form-control" required><?= $address; ?></textarea>
+      <textarea name="address" class="form-control"><?= $address; ?></textarea>
     </div>
   </div>
   <div class="col-md-12">

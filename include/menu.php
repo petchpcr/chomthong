@@ -256,10 +256,10 @@
         </a>
         <div id="maintenance_menu" class="collapse <?= $_GET['module'] == 'maintenance' ? 'show' : ''; ?>" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item <?= $_GET['action'] == 'list_maintenance' || $_GET['action'] == 'maintenance_form' ? 'active' : ''; ?>" href="index.php?module=maintenance&action=list_maintenance">แจ้งซ่อม</a>
             <a class="collapse-item <?= $_GET['action'] == 'confirm_maintenance' ? 'active' : ''; ?>" href="index.php?module=maintenance&action=confirm_maintenance">รับเรื่องแจ้งซ่อม</a>
             <a class="collapse-item <?= $_GET['action'] == 'maintenance_send' ? 'active' : ''; ?>" href="index.php?module=maintenance&action=maintenance_send">ทำเรื่องส่งซ่อม</a>
             <a class="collapse-item <?= $_GET['action'] == 'maintenance_send_finish' ? 'active' : ''; ?>" href="index.php?module=maintenance&action=maintenance_send_finish">แจ้งซ่อมสำเร็จ</a>
-            <a class="collapse-item <?= $_GET['action'] == 'list_maintenance' || $_GET['action'] == 'maintenance_form' ? 'active' : ''; ?>" href="index.php?module=maintenance&action=list_maintenance">แจ้งซ่อม</a>
           </div>
         </div>
       </li>
@@ -357,8 +357,16 @@
 
     <!-- นักศึกษา -->
     <?php } else if ($_SESSION['status'] == 0) {
-      if ($_SESSION['title'] == 'นางสาว') {
-        ?>
+      if ($_SESSION['id'] == "S-1") { ?>
+
+      <li class="nav-item <?= $_GET['module'] == 'maintenance' ? 'active' : ''; ?>">
+        <a class="nav-link" href="index.php?module=maintenance&action=list_maintenance">
+          <i class="fas fa-wrench"></i>
+          <span>นักศึกษาแจ้งซ่อม</span></a>
+      </li>
+
+    <?php } else { ?>
+
       <li class="nav-item <?= $_GET['module'] == 'dorm' ? 'active' : ''; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dorm_menu" aria-expanded="true" aria-controls="dorm_menu">
           <i class="fas fa-home"></i>
@@ -372,36 +380,30 @@
           </div>
         </div>
       </li>
-    <?php } ?>
 
-    <li class="nav-item <?= $_GET['module'] == 'maintenance' ? 'active' : ''; ?>">
-      <a class="nav-link" href="index.php?module=maintenance&action=list_maintenance">
-        <i class="fas fa-wrench"></i>
-        <span>แจ้งซ่อม</span></a>
-    </li>
-
-    <li class="nav-item <?= $_GET['module'] == 'equipment' ? 'active' : ''; ?>">
-      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#equipment_menu" aria-expanded="true" aria-controls="equipment_menu">
-        <i class="fas fa-archive"></i>
-        <span>จัดการครุภัณฑ์</span>
-      </a>
-      <div id="equipment_menu" class="collapse <?= $_GET['module'] == 'equipment' ? 'show' : ''; ?>" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item <?= $_GET['action'] == 'list_equipment_lend' ? 'active' : ''; ?>" href="index.php?module=equipment&action=list_equipment_lend">ยืมครุภัณฑ์</a>
-          <a class="collapse-item <?= $_GET['action'] == 'my_equipment_lend' ? 'active' : ''; ?>" href="index.php?module=equipment&action=my_equipment_lend">การยืมของฉัน</a>
-          <a class="collapse-item <?= $_GET['action'] == 'see_equipment_lend' ? 'active' : ''; ?>" href="index.php?module=equipment&action=see_equipment_lend">รายการยืมครุภัณฑ์</a>
-          <a class="collapse-item <?= $_GET['action'] == 'see_equipment_lend_all' ? 'active' : ''; ?>" href="index.php?module=equipment&action=see_equipment_lend_all">ประวัติการยืมทั้งหมด</a>
+      <li class="nav-item <?= $_GET['module'] == 'equipment' ? 'active' : ''; ?>">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#equipment_menu" aria-expanded="true" aria-controls="equipment_menu">
+          <i class="fas fa-archive"></i>
+          <span>จัดการครุภัณฑ์</span>
+        </a>
+        <div id="equipment_menu" class="collapse <?= $_GET['module'] == 'equipment' ? 'show' : ''; ?>" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item <?= $_GET['action'] == 'list_equipment_lend' ? 'active' : ''; ?>" href="index.php?module=equipment&action=list_equipment_lend">ยืมครุภัณฑ์</a>
+            <a class="collapse-item <?= $_GET['action'] == 'my_equipment_lend' ? 'active' : ''; ?>" href="index.php?module=equipment&action=my_equipment_lend">การยืมของฉัน</a>
+            <a class="collapse-item <?= $_GET['action'] == 'see_equipment_lend' ? 'active' : ''; ?>" href="index.php?module=equipment&action=see_equipment_lend">รายการยืมครุภัณฑ์</a>
+            <a class="collapse-item <?= $_GET['action'] == 'see_equipment_lend_all' ? 'active' : ''; ?>" href="index.php?module=equipment&action=see_equipment_lend_all">ประวัติการยืมทั้งหมด</a>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
 
-    <li class="nav-item <?= $_GET['module'] == 'alert_report' ? 'active' : ''; ?>">
-      <a class="nav-link" href="index.php?module=alert_report&action=my_alert_report">
-        <i class="fas fa-file-alt"></i>
-        <span>คำร้องเรียน</span></a>
-    </li>
+      <li class="nav-item <?= $_GET['module'] == 'alert_report' ? 'active' : ''; ?>">
+        <a class="nav-link" href="index.php?module=alert_report&action=my_alert_report">
+          <i class="fas fa-file-alt"></i>
+          <span>คำร้องเรียน</span></a>
+      </li>
 
-  <?PHP } ?>
+  <?PHP }
+  } ?>
 
   <hr class="sidebar-divider d-none d-md-block">
 
