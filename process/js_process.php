@@ -4,6 +4,68 @@ include '../function/db_function.php';
 include '../function/function.php';
 $conn = connect();
 
+// ======================================== User ========================================
+function check_have_user($conn, $DATA)
+{
+  $user_id = $DATA["user_id"];
+  $username = $DATA["username"];
+  $name = $DATA["tb_name"];
+  
+  if (!empty($user_id)) { // Edit
+    $Sql = "SELECT $name"."_user AS old_user FROM tb_$name WHERE $name"."_id = '$user_id'";
+    $return['sql_edit'] = $Sql;
+    $meQuery = mysqli_query($conn, $Sql);
+    $Result = mysqli_fetch_assoc($meQuery);
+    $old_user = $Result['old_user'];
+    if ($old_user != $username) {
+      $Sql = "SELECT COUNT(*) AS have FROM (
+                SELECT admin_user FROM tb_admin WHERE admin_user = '$username'
+                UNION ALL
+                SELECT manager_user FROM tb_manager WHERE manager_user = '$username'
+                UNION ALL
+                SELECT personnel_user FROM tb_personnel WHERE personnel_user = '$username'
+                UNION ALL
+                SELECT teacher_user FROM tb_teacher WHERE teacher_user = '$username'
+                UNION ALL
+                SELECT student_user FROM tb_student WHERE student_user = '$username'
+              ) tb_all_user";
+
+      $meQuery = mysqli_query($conn, $Sql);
+      $Result = mysqli_fetch_assoc($meQuery);
+      $have = $Result['have'];
+
+    } else {
+      $have = 0;
+    }
+  } else { // Add
+    $Sql = "SELECT COUNT(*) AS have FROM (
+              SELECT admin_user FROM tb_admin WHERE admin_user = '$username'
+              UNION ALL
+              SELECT manager_user FROM tb_manager WHERE manager_user = '$username'
+              UNION ALL
+              SELECT personnel_user FROM tb_personnel WHERE personnel_user = '$username'
+              UNION ALL
+              SELECT teacher_user FROM tb_teacher WHERE teacher_user = '$username'
+              UNION ALL
+              SELECT student_user FROM tb_student WHERE student_user = '$username'
+            ) tb_all_user";
+
+    $meQuery = mysqli_query($conn, $Sql);
+    $Result = mysqli_fetch_assoc($meQuery);
+    $have = $Result['have'];
+  }
+
+  if ($have == 0) {
+    $return['status'] = "success";
+  } else {
+    $return['status'] = "failed";
+  }
+  $return['form'] = "check_have_user";
+  echo json_encode($return);
+  mysqli_close($conn);
+  die;
+}
+
 // ======================================== Dorm ========================================
 function get_floor($conn, $DATA)
 {
@@ -211,6 +273,8 @@ if (isset($_POST['DATA'])) {
 
   if ($DATA['STATUS'] == 'logout') {
     logout($conn, $DATA);
+  } else if ($DATA['STATUS'] == 'check_have_user') {
+    check_have_user($conn, $DATA);
   } else if ($DATA['STATUS'] == 'get_floor') {
     get_floor($conn, $DATA);
   } else if ($DATA['STATUS'] == 'Evidence_pay') {

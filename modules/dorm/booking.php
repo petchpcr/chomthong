@@ -1,7 +1,4 @@
 <?PHP
-if ($_SESSION['id'] == 'S-1') {
-  echo "<script>window.location.href='index.php'</script>";
-}
 if ($_SESSION['title'] == 'นาย') {
   $gender = 1;
   $dorm_gender = "OR dorm_gender = ".$gender;

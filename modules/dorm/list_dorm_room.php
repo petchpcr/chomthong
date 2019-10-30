@@ -1,8 +1,3 @@
-<?PHP
-if ($_SESSION['id'] == 'S-1') {
-  echo "<script>window.location.href='index.php'</script>";
-}
-?>
 <div id="wrapper">
   <?PHP include "include/menu.php"; ?>
 

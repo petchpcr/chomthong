@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
 ?>
 
 <form action="process/teacher_process.php" method="post" enctype="multipart/form-data" class="row d-flex justify-content-center">
-  <input type="hidden" name="id" value="<?= $id ?>">
+  <input type="hidden" id="user_id" data-tb='teacher' name="id" value="<?= $id ?>">
   <input type="hidden" name="position_id" value="<?= $position_id; ?>">
 
 
@@ -75,7 +75,7 @@ if (isset($_GET['id'])) {
   <div class="col-md-6">
     <div class="form-group">
       <label>User :</label>
-      <input type="text" class="form-control" name="user" value="<?= $user; ?>" required>
+      <input type="text" id="user_name" class="form-control" name="user" value="<?= $user; ?>" required>
     </div>
   </div>
 
@@ -135,7 +135,9 @@ if (isset($_GET['id'])) {
       <input type="file" name="picture">
     </div>
   </div>
-  <div class="col-md-12 text-right">
-    <button type="submit" class="btn btn-primary">บันทึก</button>
-  </div>
+  <button type="submit" id="btn_add_user" hidden></button>
 </form>
+
+<div class="col-md-12 text-right">
+  <button onclick="check_have_user()" class="btn btn-primary">บันทึก</button>
+</div>

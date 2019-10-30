@@ -88,6 +88,21 @@
     }).catch(function(timeout) {});
   }
 
+  // ======================================== User ========================================
+  function check_have_user() {
+    var username = $("#user_name").val();
+    var user_id = $("#user_id").val();
+    var tb_name = $("#user_id").attr("data-tb");
+    
+    var data = {
+      'user_id': user_id,
+      'username': username,
+      'tb_name': tb_name,
+      'STATUS': 'check_have_user'
+    };
+    senddata(JSON.stringify(data));
+  }
+
   // ======================================== Dorm ========================================
   function get_floor() {
     var dorm = $("#xdorm_id").val();
@@ -266,6 +281,10 @@
         if (temp["status"] == 'success') {
           if (temp["form"] == 'logout') {
             window.location.href = '../index.html';
+
+          } else if (temp["form"] == 'check_have_user') {
+            $("#btn_add_user").click();
+
           } else if (temp["form"] == 'get_floor') {
             $("#xFloor").empty();
             $("#xFloor").append("<option value=''>ทุกชั้น</option>");
@@ -328,7 +347,13 @@
           }
 
         } else if (temp['status'] == "failed") {
-          if (temp["form"] == 'user_sign') {
+          if (temp["form"] == 'check_have_user') {
+            var Title = "ข้อมูลซ้ำ";
+            var Text = "มีชื่อผู้ใช้นี้อยู่แล้ว";
+            var Type = "warning";
+            AlertError(Title, Text, Type);
+
+          } else if (temp["form"] == 'user_sign') {
             var Title = "ไม่พบข้อมูล";
             var Text = "";
             var Type = "info";

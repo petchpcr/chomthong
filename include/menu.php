@@ -356,16 +356,7 @@
     <?PHP } ?>
 
     <!-- นักศึกษา -->
-    <?php } else if ($_SESSION['status'] == 0) {
-      if ($_SESSION['id'] == "S-1") { ?>
-
-      <li class="nav-item <?= $_GET['module'] == 'maintenance' ? 'active' : ''; ?>">
-        <a class="nav-link" href="index.php?module=maintenance&action=list_maintenance">
-          <i class="fas fa-wrench"></i>
-          <span>นักศึกษาแจ้งซ่อม</span></a>
-      </li>
-
-    <?php } else { ?>
+    <?php } else if ($_SESSION['status'] == 0) { ?>
 
       <li class="nav-item <?= $_GET['module'] == 'dorm' ? 'active' : ''; ?>">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#dorm_menu" aria-expanded="true" aria-controls="dorm_menu">
@@ -379,6 +370,12 @@
             <a class="collapse-item <?= $_GET['action'] == 'booking'  || $_GET['action'] == 'booking_dorm_room' ? 'active' : ''; ?>" href="index.php?module=dorm&action=booking">จองห้องพัก</a>
           </div>
         </div>
+      </li>
+
+      <li class="nav-item <?= $_GET['module'] == 'maintenance' ? 'active' : ''; ?>">
+        <a class="nav-link" href="index.php?module=maintenance&action=list_maintenance">
+          <i class="fas fa-wrench"></i>
+          <span>แจ้งซ่อม</span></a>
       </li>
 
       <li class="nav-item <?= $_GET['module'] == 'equipment' ? 'active' : ''; ?>">
@@ -402,8 +399,7 @@
           <span>คำร้องเรียน</span></a>
       </li>
 
-  <?PHP }
-  } ?>
+  <?PHP } ?>
 
   <hr class="sidebar-divider d-none d-md-block">
 

@@ -327,19 +327,7 @@
       <?PHP } ?>
 
       <!-- นักศึกษา -->
-      <?php } else if ($_SESSION['status'] == 0) {
-        if ($_SESSION['id'] == "S-1") { ?>
-
-        <div class="col text-center" style="display: block">
-          <div>
-            <a href="index.php?module=maintenance&action=list_maintenance" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
-              <i class="fa fa-wrench"></i>
-            </a>
-          </div>
-          <div class="mb-4 text-white">นักศึกษาแจ้งซ่อม</div>
-        </div>
-
-      <?php } else { ?>
+      <?php } else if ($_SESSION['status'] == 0) { ?>
 
         <div class="col text-center" style="display: block">
           <div>
@@ -350,6 +338,15 @@
           <div class="mb-4 text-white">จัดการหอพัก</div>
         </div>
 
+        <div class="col text-center" style="display: block">
+          <div>
+            <a href="index.php?module=maintenance&action=list_maintenance" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
+              <i class="fa fa-wrench"></i>
+            </a>
+          </div>
+          <div class="mb-4 text-white">แจ้งซ่อม</div>
+        </div>
+        
         <div class="col text-center" style="display: block">
           <div>
             <a href="index.php?module=equipment&action=list_equipment_lend" class="btn btn-primary btn-circle btn-jumbo shadow-lg m-4 border">
@@ -368,8 +365,7 @@
           <div class="mb-4 text-white">คำร้องเรียน</div>
         </div>
 
-      <?php }
-      } else { ?>
+      <?php } else { ?>
         <h2 class="text-center" style="padding-top: 100px;">คุณไม่มีสิทธิ์ใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ</h2>
       <?php } ?>
 

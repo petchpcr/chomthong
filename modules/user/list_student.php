@@ -21,8 +21,6 @@
               เพิ่มข้อมูล</a>
           </div>
 
-
-
           <?PHP
           $sql = "SELECT * FROM tb_student a 
                   LEFT JOIN tb_major b on a.major_id = b.major_id 
@@ -68,11 +66,9 @@
                       </a>
                     </td>
                     <td class="text-center">
-                      <?php if ($_list['student_id'] != 1) { ?>
-                        <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
-                          <i class="fa fa-times"></i>
-                        </button>
-                      <?PHP } ?>
+                      <button class="btn btn-sm btn-danger" onclick="AlertConLink('<?= $Title; ?>', '<?= $Text; ?>', '<?= $Color; ?>', '<?= $Link; ?>')">
+                        <i class="fa fa-times"></i>
+                      </button>
                     </td>
                   </tr>
                 <?PHP } ?>

@@ -66,9 +66,6 @@
         $address = $row['personnel_address'];
         $picture = $row['personnel_picture'];
       } else if ($status == 0) {
-        if ($_SESSION['id'] == "S-1") {
-          echo "<script>window.location.href='index.php'</script>";
-        }
         $sql = "SELECT * FROM tb_student WHERE student_id = {$id}";
         $row = row_array($sql);
 
@@ -129,7 +126,6 @@
               <input type="password" class="form-control" name="password" value="<?= $password; ?>" required>
             </div>
           </div>
-
 
           <div class="col-sm-12 col-md-8 col-lg-6">
             <div class="form-group">

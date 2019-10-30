@@ -1,12 +1,3 @@
-<?PHP
-if ($_SESSION['status'] == 0) {
-  if ($_SESSION['id'] != 'S-1') {
-    echo "<script>window.location.href='index.php';</script>";
-  } else {
-    $remark = " (กรุณาระบุชื่อผู้แจ้ง)";
-  }
-}
-?>
 <div id="wrapper">
   <?PHP include "include/menu.php"; ?>
 
@@ -25,7 +16,6 @@ if ($_SESSION['status'] == 0) {
       <div class="row d-flex justify-content-center">
 
         <div class="col-md-8 col-md-offset-2">
-
 
           <form action="process/maintenance_process.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?= $id ?>">
@@ -71,8 +61,8 @@ if ($_SESSION['status'] == 0) {
 
             <div class="col-md-12">
               <div class="form-group">
-                <label>หมายเหตุ :<?= $remark; ?></label>
-                <textarea name="maintenance_msg" class="form-control" required></textarea>
+                <label>หมายเหตุ :</label>
+                <textarea name="maintenance_msg" class="form-control"></textarea>
               </div>
             </div>
 
